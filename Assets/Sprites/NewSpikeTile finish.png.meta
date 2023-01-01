@@ -1,0 +1,675 @@
+fileFormatVersion: 2
+guid: e1b6495c81df5d84aa15b3ebafd3cabf
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NewSpikeTile finish_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2.9206085, y: 7}
+        - {x: 0, y: 6}
+        - {x: -2.9556742, y: 7}
+        - {x: -3, y: 5}
+        - {x: -4.9845023, y: 7}
+        - {x: -7, y: 7}
+        - {x: -7, y: 1.0465088}
+        - {x: -5, y: 1}
+        - {x: -5, y: -2}
+        - {x: -7, y: -2.0194054}
+        - {x: -7, y: -4.955803}
+        - {x: -5, y: -5}
+        - {x: -6, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 525cb882a78b3bd4ab97dfecca17a449
+      internalID: -1608515827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 2, y: 7}
+        - {x: 0, y: 5}
+        - {x: -2, y: 7}
+        - {x: -8, y: 7}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8be291c9d57e864093c15c51081243f
+      internalID: 609499867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 3, y: 5}
+        - {x: 3, y: 7}
+        - {x: 0, y: 6}
+        - {x: -2.9350662, y: 6.999996}
+        - {x: -8, y: 7}
+        - {x: -8, y: -8}
+        - {x: 7, y: -8}
+        - {x: 5, y: -7}
+        - {x: 5, y: -5}
+        - {x: 7, y: -5}
+        - {x: 7, y: -2.8834686}
+        - {x: 5, y: -1}
+        - {x: 5, y: 1}
+        - {x: 7, y: 1.9350624}
+        - {x: 7, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdec14bbb553b644ebd5755e8bbcd2c9
+      internalID: 1750477690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 4.9678764, y: 7}
+        - {x: 3, y: 5}
+        - {x: 3, y: 7}
+        - {x: -7, y: 7}
+        - {x: -6.999996, y: 1.9350777}
+        - {x: -4, y: 2}
+        - {x: -7, y: -2}
+        - {x: -7, y: -4.0209618}
+        - {x: -4, y: -4}
+        - {x: -7, y: -6.923996}
+        - {x: -7, y: -8}
+        - {x: 7, y: -8}
+        - {x: 4, y: -5}
+        - {x: 7, y: -5}
+        - {x: 7, y: -3.0602303}
+        - {x: 4, y: 1}
+        - {x: 7, y: 1}
+        - {x: 7, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2a4af2df0925bd42b4fd9ad0b2070e5
+      internalID: -357385658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -7, y: 8}
+        - {x: -7, y: 5}
+        - {x: -5, y: 5}
+        - {x: -7, y: 1}
+        - {x: -7, y: -0.0690155}
+        - {x: -4, y: 0}
+        - {x: -7, y: -2.0047188}
+        - {x: -7, y: -4.9610405}
+        - {x: -5, y: -5}
+        - {x: -6, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
+      - - {x: 3, y: 4}
+        - {x: 4, y: 3}
+        - {x: 2, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a76a67f8cdc4e6849ad3b8bf34c4c54c
+      internalID: 1291569520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84c32d4f084f5eb42a7dab880bc43025
+      internalID: 29731090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 6, y: -8}
+        - {x: 5, y: -7}
+        - {x: 5, y: -5}
+        - {x: 7, y: -4.9434166}
+        - {x: 7.000004, y: -2.0648575}
+        - {x: 5, y: -1}
+        - {x: 7, y: -0.035224915}
+        - {x: 7, y: 2}
+        - {x: 5, y: 4}
+        - {x: 7, y: 5}
+        - {x: 7, y: 8}
+      - - {x: -3, y: 4}
+        - {x: -2, y: 3}
+        - {x: -4, y: 3}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0542fb1ac84242b4d9897834e9c3b16f
+      internalID: 494085283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -7, y: 8}
+        - {x: -6.999996, y: 0.95796204}
+        - {x: -4, y: 1}
+        - {x: -6.999996, y: -0.9769592}
+        - {x: -7, y: -3.9635048}
+        - {x: -5, y: -4}
+        - {x: -6, y: -8}
+        - {x: 6, y: -8}
+        - {x: 5, y: -5}
+        - {x: 7, y: -5}
+        - {x: 7, y: -2.0386124}
+        - {x: 4, y: 0}
+        - {x: 7, y: 0}
+        - {x: 7, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 929645159095d164fa4dce3cde0f0775
+      internalID: -1566937846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6, y: 8}
+        - {x: -5, y: 5}
+        - {x: -7, y: 5}
+        - {x: -7, y: 2.0647144}
+        - {x: -5, y: 1}
+        - {x: -5, y: -1}
+        - {x: -7, y: -1}
+        - {x: -7, y: -7}
+        - {x: -6, y: -7}
+        - {x: -3, y: -4}
+        - {x: -2.9771218, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a6db905f209b1418f5104fd1efaf61
+      internalID: 1053417835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -7}
+        - {x: -1, y: -7}
+        - {x: 0, y: -5}
+        - {x: 1, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57e70221e169caf4d8259c3b00883347
+      internalID: 108945622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -7}
+        - {x: 3, y: -7}
+        - {x: 3, y: -4}
+        - {x: 5.1414337, y: -7}
+        - {x: 7, y: -7}
+        - {x: 7, y: -1.0389633}
+        - {x: 4, y: -1}
+        - {x: 7, y: 2}
+        - {x: 7, y: 5}
+        - {x: 5, y: 5}
+        - {x: 5, y: 7}
+        - {x: 6, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dba547ba6753a478e683404a0162b1
+      internalID: -1506159864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -6, y: 8}
+        - {x: -5, y: 6}
+        - {x: -7, y: 6}
+        - {x: -6.999996, y: 3.0266666}
+        - {x: -5, y: 2}
+        - {x: -5, y: 0}
+        - {x: -6.999996, y: 0.06390953}
+        - {x: -7, y: -7}
+        - {x: -3, y: -3}
+        - {x: -3, y: -7}
+        - {x: 0, y: -5}
+        - {x: 1.9204826, y: -7}
+        - {x: 3, y: -7}
+        - {x: 3, y: -4}
+        - {x: 7, y: -7}
+        - {x: 6.999996, y: -0.9727154}
+        - {x: 5, y: -1}
+        - {x: 5, y: 1}
+        - {x: 7, y: 2.1000214}
+        - {x: 7, y: 5}
+        - {x: 5, y: 5}
+        - {x: 5, y: 7}
+        - {x: 6, y: 8}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0a5b7e7c04e0d64a9ede10df0583e23
+      internalID: -1613298867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -7, y: 7}
+        - {x: -7, y: 2}
+        - {x: -4, y: 0}
+        - {x: -7, y: -2}
+        - {x: -7, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 401bf31ff7795474084c73997b7300ff
+      internalID: -5440844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 7}
+        - {x: -8, y: -7}
+        - {x: 8, y: -7}
+        - {x: 8, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a8e7d3b76212724aa4762ccdcbdc6c9
+      internalID: -1303293794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -8, y: 7}
+        - {x: -8, y: -7}
+        - {x: 7, y: -7}
+        - {x: 6.999996, y: -1.9208493}
+        - {x: 4, y: 0}
+        - {x: 6.999996, y: 2.0719929}
+        - {x: 7, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfafd67dd2c764c43b211dd7b61e6e07
+      internalID: -2014147923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NewSpikeTile finish_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -7, y: 7}
+        - {x: -6.999996, y: 2.0720034}
+        - {x: -4, y: 0}
+        - {x: -7, y: -2.0562458}
+        - {x: -7, y: -7}
+        - {x: 7, y: -7}
+        - {x: 7, y: -1.9208436}
+        - {x: 4, y: 0}
+        - {x: 7, y: 2.0719976}
+        - {x: 7, y: 7}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85e2df66ea723bd40a1d0d5974fe63c8
+      internalID: -433414367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      NewSpikeTile finish_10: -1506159864
+      NewSpikeTile finish_5: 29731090
+      NewSpikeTile finish_7: -1566937846
+      NewSpikeTile finish_3: -357385658
+      NewSpikeTile finish_12: -5440844
+      NewSpikeTile finish_2: 1750477690
+      NewSpikeTile finish_15: -433414367
+      NewSpikeTile finish_4: 1291569520
+      NewSpikeTile finish_13: -1303293794
+      NewSpikeTile finish_8: 1053417835
+      NewSpikeTile finish_9: 108945622
+      NewSpikeTile finish_14: -2014147923
+      NewSpikeTile finish_6: 494085283
+      NewSpikeTile finish_1: 609499867
+      NewSpikeTile finish_0: -1608515827
+      NewSpikeTile finish_11: -1613298867
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
