@@ -25,6 +25,14 @@ public class ParticleManager : MonoBehaviour
         particleSystem.Play();
     }
 
+    public void PlayParticle(GameObject particlePrefab, Vector3 pos, float rotationZ)
+    {
+        GameObject particleObject = Instantiate(particlePrefab, pos, Quaternion.Euler(0f, 0f, rotationZ));
+        ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
+
+        particleSystem.Play();
+    }
+
     public void PlayParticle(GameObject particlePrefab, Vector3 pos, Color color)
     {
         GameObject particleObject = Instantiate(particlePrefab, pos, Quaternion.identity);

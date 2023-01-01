@@ -10,6 +10,9 @@ public class PlayerMover : MonoBehaviour
     [SerializeField]
     private GameObject playerTrailParticlePrefab;
 
+    [SerializeField]
+    private GameObject playerSpeedyParticlePrefab;
+
     private float moveSpeedHorizontal;
     private float basicGravity;
 
@@ -59,6 +62,8 @@ public class PlayerMover : MonoBehaviour
         {
             MoveScroll(playerInput.scroll);
         }
+
+        PlaySpeedyParticleIfSpeedy();
     }
 
     private void MoveScroll(float inputSignal)
@@ -90,7 +95,23 @@ public class PlayerMover : MonoBehaviour
         SetPlayerGravity(basicGravity);
     }
 
+    private void PlaySpeedyParticleIfSpeedy()
+    {
+        float speedThreshold = 40f;
 
+        if (playerRigidbody.velocity.magnitude > speedThreshold)
+        {
+            PlaySpeedyParticle();
+        }
+    }
+
+    private void PlaySpeedyParticle()
+    {
+        Vector3 particleVector = -playerRigidbody.velocity;
+        float particleRotationZ = MathUtility.GetAngleBetweenVectors(Vector2.up, particleVector);
+
+        ParticleManager.instance.PlayParticle(playerSpeedyParticlePrefab, transform.position, particleRotationZ);
+    }
 
 
     // 캐릭터 자체 좌우 이동이 있을 때 만든 메서드
