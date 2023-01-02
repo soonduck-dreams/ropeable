@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TargetItem : MonoBehaviour, ISpeaker
 {
-    public Color particleColor;
+    public Color itemColor;
 
     [SerializeField]
     private GameObject targetGottenParticlePrefab;
+
+    [SerializeField]
+    private GameObject ascendingTextPrefab;
 
     private List<IListener> listeners;
 
@@ -18,11 +22,17 @@ public class TargetItem : MonoBehaviour, ISpeaker
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        float ascendingTextOffset = 1f;
+        Vector3 ascendingTextPosition = transform.position + ascendingTextOffset * Vector3.up;
+
         if(collision.tag == "Player")
         {
             GameManager.instance.OnTargetItemEaten();
             SpeakToListeners();
-            ParticleManager.instance.PlayParticle(targetGottenParticlePrefab, transform.position, particleColor);
+            ParticleManager.instance.PlayParticle(targetGottenParticlePrefab, transform.position, itemColor);
+            TextUtility.DisplayAscendingText(GameManager.instance.score.ToString(),
+                                                ascendingTextPrefab, ascendingTextPosition,
+                                                itemColor, 1f, 1f);
             Destroy(gameObject);
         }
     }
