@@ -21,10 +21,10 @@ public class LevelInfoManager : MonoBehaviour
     private string[] levelTitle = new string[76];  
 
     // 플레이어 Stats
-    private int lastLevelCleared;
-    private bool[] isStarCleared;
-    private int[] numLeastRopeUsedToClear;
-    private float[] shortestSecondsTakenToClear;
+    private static int lastLevelCleared = -1;
+    private static bool[] isStarCleared = null;
+    private static int[] numLeastRopeUsedToClear = null;
+    private static float[] shortestSecondsTakenToClear = null;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class LevelInfoManager : MonoBehaviour
 
         SetRopeRewarded();
         SetLevelTitle();
-        LoadStats();
+        InitStatsIfNeeded();
 
         if (isForMainUI)
         {
@@ -46,19 +46,6 @@ public class LevelInfoManager : MonoBehaviour
         }
 
         curLevel = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
-    }
-
-    private void Update()
-    {
-        if (isForMainUI)
-        {
-            return;
-        }
-
-        /*DebugUtility.Log("lastLevelCleared", lastLevelCleared,
-            "isStarCleared", isStarCleared[curLevel],
-            "numLeastRopeUsedToClear", numLeastRopeUsedToClear[curLevel],
-            "shortestSecondsTaken", shortestSecondsTakenToClear[curLevel]);*/
     }
 
     private void SetRopeRewarded()
@@ -102,37 +89,34 @@ public class LevelInfoManager : MonoBehaviour
         return levelTitle[level];
     }
 
-    private void LoadStats()
+    private void InitStatsIfNeeded()
     {
-        if(!SaveLoadManager.instance.LoadInteger("lastLevelCleared", out lastLevelCleared))
+        if (lastLevelCleared == -1)
         {
             lastLevelCleared = 0;
         }
 
-        if (!SaveLoadManager.instance.LoadArray("isStarCleared", out isStarCleared))
+        if (isStarCleared == null)
         {
             isStarCleared = new bool[76];
-
             for (int i = 1; i <= 75; i++)
             {
                 isStarCleared[i] = false;
             }
         }
 
-        if (!SaveLoadManager.instance.LoadArray("numLeastRopeUsedToClear", out numLeastRopeUsedToClear))
+        if (numLeastRopeUsedToClear == null)
         {
             numLeastRopeUsedToClear = new int[76];
-
             for (int i = 1; i <= 75; i++)
             {
                 numLeastRopeUsedToClear[i] = 0;
             }
         }
 
-        if (!SaveLoadManager.instance.LoadArray("shortestSecondsTakenToClear", out shortestSecondsTakenToClear))
+        if (shortestSecondsTakenToClear == null)
         {
             shortestSecondsTakenToClear = new float[76];
-
             for (int i = 1; i < 75; i++)
             {
                 shortestSecondsTakenToClear[i] = 0f;
@@ -180,17 +164,14 @@ public class LevelInfoManager : MonoBehaviour
 
     private void SaveStats()
     {
-        SaveLoadManager.instance.SaveInteger("lastLevelCleared", lastLevelCleared);
-        SaveLoadManager.instance.SaveArray("isStarCleared", isStarCleared);
-        SaveLoadManager.instance.SaveArray("numLeastRopeUsedToClear", numLeastRopeUsedToClear);
-        SaveLoadManager.instance.SaveArray("shortestSecondsTakenToClear", shortestSecondsTakenToClear);
+
     }
 
     public void GetStats(out int lastLevelCleared, out bool[] isStarCleared, out int[] numLeastRopeUsedToClear, out float[] shortestSecondsTakenToClear)
     {
-        lastLevelCleared = this.lastLevelCleared;
-        isStarCleared = this.isStarCleared;
-        numLeastRopeUsedToClear = this.numLeastRopeUsedToClear;
-        shortestSecondsTakenToClear = this.shortestSecondsTakenToClear;
+        lastLevelCleared = LevelInfoManager.lastLevelCleared;
+        isStarCleared = LevelInfoManager.isStarCleared;
+        numLeastRopeUsedToClear = LevelInfoManager.numLeastRopeUsedToClear;
+        shortestSecondsTakenToClear = LevelInfoManager.shortestSecondsTakenToClear;
     }
 }
