@@ -38,6 +38,8 @@ public class LevelInfoManager : MonoBehaviour
 
         SetRopeRewarded();
         SetLevelTitle();
+
+        LoadStats();
         InitStatsIfNeeded();
 
         if (isForMainUI)
@@ -162,9 +164,20 @@ public class LevelInfoManager : MonoBehaviour
         }
     }
 
+    private void LoadStats()
+    {
+        if (!SaveLoadManager.allowToSaveAndLoadOnline)
+        {
+            return;
+        }
+    }
+
     private void SaveStats()
     {
-
+        if (!SaveLoadManager.allowToSaveAndLoadOnline)
+        {
+            return;
+        }
     }
 
     public void GetStats(out int lastLevelCleared, out bool[] isStarCleared, out int[] numLeastRopeUsedToClear, out float[] shortestSecondsTakenToClear)
