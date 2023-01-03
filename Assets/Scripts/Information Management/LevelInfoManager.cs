@@ -16,9 +16,11 @@ public class LevelInfoManager : MonoBehaviour
     [HideInInspector]
     public int curLevel;
 
-    // 1 ~ 75 레벨별 고정 정보
-    private int[] ropeRewarded = new int[76];
-    private string[] levelTitle = new string[76];  
+    public static readonly int maxLevel = 50;
+
+    // 레벨별 고정 정보
+    private int[] ropeRewarded = new int[maxLevel + 1];
+    private string[] levelTitle = new string[maxLevel + 1];  
 
     // 플레이어 Stats
     private static int lastLevelCleared = -1;
@@ -52,7 +54,7 @@ public class LevelInfoManager : MonoBehaviour
 
     private void SetRopeRewarded()
     {
-        for (int i = 1; i <= 75; i++)
+        for (int i = 1; i <= maxLevel; i++)
         {
             ropeRewarded[i] = 10;
         }
@@ -100,8 +102,8 @@ public class LevelInfoManager : MonoBehaviour
 
         if (isStarCleared == null)
         {
-            isStarCleared = new bool[76];
-            for (int i = 1; i <= 75; i++)
+            isStarCleared = new bool[maxLevel + 1];
+            for (int i = 1; i <= maxLevel; i++)
             {
                 isStarCleared[i] = false;
             }
@@ -109,8 +111,8 @@ public class LevelInfoManager : MonoBehaviour
 
         if (numLeastRopeUsedToClear == null)
         {
-            numLeastRopeUsedToClear = new int[76];
-            for (int i = 1; i <= 75; i++)
+            numLeastRopeUsedToClear = new int[maxLevel + 1];
+            for (int i = 1; i <= maxLevel; i++)
             {
                 numLeastRopeUsedToClear[i] = 0;
             }
@@ -118,8 +120,8 @@ public class LevelInfoManager : MonoBehaviour
 
         if (shortestSecondsTakenToClear == null)
         {
-            shortestSecondsTakenToClear = new float[76];
-            for (int i = 1; i < 75; i++)
+            shortestSecondsTakenToClear = new float[maxLevel + 1];
+            for (int i = 1; i <= maxLevel; i++)
             {
                 shortestSecondsTakenToClear[i] = 0f;
             }
@@ -166,18 +168,26 @@ public class LevelInfoManager : MonoBehaviour
 
     private void LoadStats()
     {
-        if (!SaveLoadManager.allowToSaveAndLoadOnline)
+        if (SaveLoadManager.allowToSaveAndLoadOnline)
         {
-            return;
+            SaveLoadManager.instance.RequestToLoadUserData();
         }
     }
 
     private void SaveStats()
     {
-        if (!SaveLoadManager.allowToSaveAndLoadOnline)
+        if (SaveLoadManager.allowToSaveAndLoadOnline)
         {
-            return;
+            SaveLoadManager.instance.RequestToSaveUserData(lastLevelCleared, isStarCleared, numLeastRopeUsedToClear, shortestSecondsTakenToClear);
         }
+    }
+
+    public void SetStats(int lastLevelCleared, bool[] isStarCleared, int[] numLeastRopeUsedToClear, float[] shortestSecondsTakenToClear)
+    {
+        LevelInfoManager.lastLevelCleared = lastLevelCleared;
+        LevelInfoManager.isStarCleared = isStarCleared;
+        LevelInfoManager.numLeastRopeUsedToClear = numLeastRopeUsedToClear;
+        LevelInfoManager.shortestSecondsTakenToClear = shortestSecondsTakenToClear;
     }
 
     public void GetStats(out int lastLevelCleared, out bool[] isStarCleared, out int[] numLeastRopeUsedToClear, out float[] shortestSecondsTakenToClear)

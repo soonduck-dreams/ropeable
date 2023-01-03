@@ -30,6 +30,11 @@ public class LoginUIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text loginSuccessfulText;
 
+    private void Start()
+    {
+        playfabManager.LoginToPlayfabServer();
+    }
+
     public void ShowCreateNewAccount()
     {
         HideStandby();

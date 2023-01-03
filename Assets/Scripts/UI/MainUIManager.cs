@@ -72,7 +72,7 @@ public class MainUIManager : MonoBehaviour
         GameObject button;
         LevelSelectButton buttonInfo;
 
-        for (int i = 1; i <= 75; i++)
+        for (int i = 1; i <= LevelInfoManager.maxLevel; i++)
         {
             button = Instantiate(buttonPrefab, gridContent.transform);
             buttonInfo = button.GetComponent<LevelSelectButton>();
