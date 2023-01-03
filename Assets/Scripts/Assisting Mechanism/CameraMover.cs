@@ -134,7 +134,7 @@ public class CameraMover : MonoBehaviour
         targetMode = TargetMode.SectionSnapped;
     }
 
-    private void SetTargetPositionWithPlayerCentered() // deprecated
+    private void SetTargetPositionWithPlayerCentered()
     {
         float playerFocusRatio = (1 / 3f) * (playerTransform.position - rope.ropeStartPoint).magnitude - (2 / 3f);
         // playerFocusRatio : 플레이어와 밧줄 반대편 지점 간 거리가 멀수록 카메라가 플레이어를 중심으로 잡도록 만드는 비율.

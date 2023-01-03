@@ -143,4 +143,12 @@ public class LevelUIManager : MonoBehaviour
 
         descriptionText.text = descriptionTextBuilder.ToString();
     }
+
+    public void LeaderboardButton()
+    {
+        if (SaveLoadManager.allowToSaveAndLoadOnline)
+        {
+            SaveLoadManager.instance.RequestToGetLeaderboard(LevelInfoManager.instance.curLevel);
+        }
+    }
 }

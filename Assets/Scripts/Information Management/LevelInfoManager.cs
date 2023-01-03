@@ -16,7 +16,7 @@ public class LevelInfoManager : MonoBehaviour
     [HideInInspector]
     public int curLevel;
 
-    public static readonly int maxLevel = 50;
+    public static readonly int maxLevel = 5;
 
     // 레벨별 고정 정보
     private int[] ropeRewarded = new int[maxLevel + 1];
@@ -159,6 +159,13 @@ public class LevelInfoManager : MonoBehaviour
             numLeastRopeUsedToClear[curLevel] = playerRopeShooter.numRopeUsedToClear;
             shortestSecondsTakenToClear[curLevel] = playerRopeShooter.secondsTakenToClear;
             LevelUIManager.instance.SetBestRecordImage(true);
+
+            if (SaveLoadManager.allowToSaveAndLoadOnline)
+            {
+                SaveLoadManager.instance.RequestToSendToLeaderboard(curLevel,
+                                                                    numLeastRopeUsedToClear[curLevel],
+                                                                    shortestSecondsTakenToClear[curLevel]);
+            }
         }
         else
         {

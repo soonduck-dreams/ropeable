@@ -10,7 +10,7 @@ public class SaveLoadManager : MonoBehaviour
     private PlayfabManager playfabManager;
 
     public static SaveLoadManager instance;
-    public readonly static bool allowToSaveAndLoadOnline = false;
+    public readonly static bool allowToSaveAndLoadOnline = true;
 
     private void Awake()
     {
@@ -55,5 +55,27 @@ public class SaveLoadManager : MonoBehaviour
         }
 
         LevelInfoManager.instance.SetStats(lastLevelCleared, isStarCleared, numLeastRopeUsedToClear, shortestSecondsTakenToClear);
+    }
+
+    public void RequestToSendToLeaderboard(int level, int numLeastRopeUsedToClear, float shortestSecondsTakenToClear)
+    {
+        string leaderboardName = "LevelScore" + level.ToString();
+        int score = LeaderboardScore(numLeastRopeUsedToClear, shortestSecondsTakenToClear);
+        
+        playfabManager.SendToLeaderboard(leaderboardName, score);
+    }
+
+    public void RequestToGetLeaderboard(int level)
+    {
+        string leaderboardName = "LevelScore" + level.ToString();
+
+        playfabManager.ReceiveLeaderboard(leaderboardName);
+    }
+
+    private int LeaderboardScore(int ropeRecord, float timeRecord)
+    {
+        string timeString = timeRecord.ToString().Split('.')[0] + timeRecord.ToString().Split('.')[1];
+
+        return ropeRecord * 1000000 + int.Parse(timeString);
     }
 }

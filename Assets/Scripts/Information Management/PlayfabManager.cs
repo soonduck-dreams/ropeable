@@ -11,6 +11,9 @@ public class PlayfabManager : MonoBehaviour
     [SerializeField]
     private LoginUIManager loginUIManager;
 
+    // 데모용 저장 데이터를 나타내는 키. 정식판에서는 DEMO_를 뺄 예정
+    private readonly string userLevelDataKey = "DEMO_UserLevelData";
+
     public string username { get; private set; }
 
     public void LoginToPlayfabServer()
@@ -75,7 +78,7 @@ public class PlayfabManager : MonoBehaviour
             Data = new Dictionary<string, string>
             {
                 {"LastLevelCleared", lastLevelCleared.ToString() },
-                {"UserLevelData", JsonConvert.SerializeObject(userLevelDataList) }
+                {userLevelDataKey, JsonConvert.SerializeObject(userLevelDataList) }
             }
         };
 
@@ -102,7 +105,7 @@ public class PlayfabManager : MonoBehaviour
             return;
         }
 
-        if (!result.Data.ContainsKey("LastLevelCleared") || !result.Data.ContainsKey("UserLevelData"))
+        if (!result.Data.ContainsKey("LastLevelCleared") || !result.Data.ContainsKey(userLevelDataKey))
         {
             Debug.Log("PlayFabManager: 서버 유저 데이터가 불완전하여 받지 않았습니다.");
             return;
@@ -112,8 +115,52 @@ public class PlayfabManager : MonoBehaviour
 
         int lastLevelCleared = int.Parse(result.Data["LastLevelCleared"].Value);
         UserLevelData[] userLevelDataList =
-            JsonConvert.DeserializeObject<UserLevelData[]>(result.Data["UserLevelData"].Value);
+            JsonConvert.DeserializeObject<UserLevelData[]>(result.Data[userLevelDataKey].Value);
 
         SaveLoadManager.instance.RecieveUserData(lastLevelCleared, userLevelDataList);
+    }
+
+    public void SendToLeaderboard(string leaderboardName, int score)
+    {
+        var request = new UpdatePlayerStatisticsRequest
+        {
+            Statistics = new List<StatisticUpdate>
+            {
+                new StatisticUpdate
+                {
+                    StatisticName = leaderboardName,
+                    Value = score
+                }
+            }
+        };
+
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSendToLeaderboardSuccess,
+            error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    private void OnSendToLeaderboardSuccess(UpdatePlayerStatisticsResult result)
+    {
+        Debug.Log("PlayFabManager: 리더보드에 기록을 성공적으로 등록했습니다.");
+    }
+
+    public void ReceiveLeaderboard(string leaderboardName)
+    {
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = leaderboardName,
+            StartPosition = 0,
+            MaxResultsCount = 100
+        };
+
+        PlayFabClientAPI.GetLeaderboard(request, OnReceiveLeaderboard,
+            error => Debug.Log(error.GenerateErrorReport()));
+    }
+
+    private void OnReceiveLeaderboard(GetLeaderboardResult result)
+    {
+        foreach (var item in result.Leaderboard)
+        {
+            Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
+        }
     }
 }

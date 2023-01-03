@@ -30,7 +30,7 @@ public class TimeMeasurer
 
     public float StopMeasure()
     {
-        long maxMilliseconds = 1800000; // 1800000ms = 1800s = 30m
+        long maxMilliseconds = 900000; // 900000ms = 900s = 15m
 
         _stopwatch.Stop();
 
