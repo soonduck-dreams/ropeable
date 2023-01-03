@@ -43,7 +43,8 @@ public class PlayerRopeShooter : MonoBehaviour
 
     private void Update()
     {
-        if(cameraMover.HasTargetPositionChanged())
+        if(cameraMover.targetMode == CameraMover.TargetMode.SectionSnapped
+            && cameraMover.HasTargetPositionChanged())
         {
             CutRope(Vector3.zero);
         }

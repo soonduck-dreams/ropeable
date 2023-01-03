@@ -56,7 +56,7 @@ public class LevelInfoManager : MonoBehaviour
     {
         for (int i = 1; i <= maxLevel; i++)
         {
-            ropeRewarded[i] = 10;
+            ropeRewarded[i] = 20;
         }
     }
 

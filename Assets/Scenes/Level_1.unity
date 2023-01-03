@@ -191,6 +191,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4da7f6a846cee144837dddf56fac88d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &40707195 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 40707195, guid: ad76cc1525947ce429733589aa846336, type: 3}
+  m_PrefabInstance: {fileID: 1176019868}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &57299414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 57299414, guid: ad76cc1525947ce429733589aa846336, type: 3}
@@ -264,6 +275,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 57299414}
     - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
+      propertyPath: clearText
+      value: 
+      objectReference: {fileID: 40707195}
+    - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
       propertyPath: debugText
       value: 
       objectReference: {fileID: 610436476}
@@ -279,6 +294,10 @@ PrefabInstance:
       propertyPath: clearedText
       value: 
       objectReference: {fileID: 1176019871}
+    - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
+      propertyPath: pauseButton
+      value: 
+      objectReference: {fileID: 1515279536}
     - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
       propertyPath: ropesUsedText
       value: 
@@ -303,6 +322,10 @@ PrefabInstance:
       propertyPath: playerRopeShooter
       value: 
       objectReference: {fileID: 1334083158}
+    - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
+      propertyPath: ropesRewardedArea
+      value: 
+      objectReference: {fileID: 223469006}
     - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
       propertyPath: ropesRewardedText
       value: 
@@ -381,6 +404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f903cdc4b21e94842927bcfe30e37217, type: 3}
+--- !u!1 &223469006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2492488507941371071, guid: ad76cc1525947ce429733589aa846336, type: 3}
+  m_PrefabInstance: {fileID: 1176019868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &302390551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4070279330552054639, guid: beac52b00f9dea542abd5a688ef2f673, type: 3}
@@ -1131,18 +1159,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 73001215}
-    - target: {fileID: 57299414, guid: ad76cc1525947ce429733589aa846336, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 907125981, guid: ad76cc1525947ce429733589aa846336, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1376303411}
-    - target: {fileID: 986297561, guid: ad76cc1525947ce429733589aa846336, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1421904929, guid: ad76cc1525947ce429733589aa846336, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1243,6 +1263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2020027170767740012, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2020027171176283717, guid: ad76cc1525947ce429733589aa846336, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1251,6 +1275,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1376303411}
+    - target: {fileID: 2084583120704768856, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084583120704768856, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.92892253
+      objectReference: {fileID: 0}
+    - target: {fileID: 2084583120704768856, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492488507941371071, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5003662482155305239, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5003662482155305239, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5003662482155305239, guid: ad76cc1525947ce429733589aa846336, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad76cc1525947ce429733589aa846336, type: 3}
 --- !u!1 &1176019869 stripped
@@ -1584,6 +1636,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3791719692092790751, guid: 2519328c9691924428e3c9c798ca0b18, type: 3}
   m_PrefabInstance: {fileID: 875519311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1515279536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1996680310, guid: ad76cc1525947ce429733589aa846336, type: 3}
+  m_PrefabInstance: {fileID: 1176019868}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1974209841 stripped
 GameObject:
@@ -2142,6 +2199,22 @@ PrefabInstance:
     - target: {fileID: 6257357805068665464, guid: 7426d22ce802a9749bec8924dde96451, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257357805068665467, guid: 7426d22ce802a9749bec8924dde96451, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257357805068665467, guid: 7426d22ce802a9749bec8924dde96451, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257357805068665467, guid: 7426d22ce802a9749bec8924dde96451, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257357805068665467, guid: 7426d22ce802a9749bec8924dde96451, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6257357805068665476, guid: 7426d22ce802a9749bec8924dde96451, type: 3}
       propertyPath: m_RootOrder

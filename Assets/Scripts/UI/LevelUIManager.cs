@@ -14,7 +14,7 @@ public class LevelUIManager : MonoBehaviour
     private GameObject clearUI;
 
     [SerializeField]
-    private Sprite starClearPanel;
+    private TMP_Text clearText;
 
     [SerializeField]
     private TMP_Text levelText;
@@ -26,6 +26,9 @@ public class LevelUIManager : MonoBehaviour
     private TMP_Text timeTakenText;
 
     [SerializeField]
+    private GameObject ropesRewardedArea;
+
+    [SerializeField]
     private TMP_Text ropesRewardedText;
 
     [SerializeField]
@@ -33,6 +36,9 @@ public class LevelUIManager : MonoBehaviour
 
     [SerializeField]
     private GameObject pauseUI;
+
+    [SerializeField]
+    private GameObject pauseButton;
 
     [SerializeField]
     private TMP_Text descriptionText;
@@ -67,11 +73,18 @@ public class LevelUIManager : MonoBehaviour
     {
         if (ropeUsedToClear <= LevelInfoManager.instance.GetRopeRewarded())
         {
-            clearUI.GetComponent<Image>().sprite = starClearPanel;
+            Color color;
+            ColorUtility.TryParseHtmlString("#FBF236", out color);
+
+            clearText.text = "Star Cleared";
+            clearText.color = color;
+            
+            ropesRewardedArea.SetActive(true);
         }
 
         SetRopeUsedText(ropeUsedToClear);
         SetTimeTakenText(secondsTakenToClear);
+        pauseButton.SetActive(false);
         clearUI.SetActive(true);
     }
 
@@ -108,7 +121,8 @@ public class LevelUIManager : MonoBehaviour
 
     private void SetRopeRewardedText()
     {
-        ropesRewardedText.text = LevelInfoManager.instance.GetRopeRewarded().ToString();
+        ropesRewardedText.text = string.Format("use {0} or less ropes\nto star clear",
+            LevelInfoManager.instance.GetRopeRewarded().ToString());
     }
 
     public void SetBestRecordImage(bool isPersonalBest)

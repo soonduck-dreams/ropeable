@@ -20,6 +20,14 @@ public class CameraMover : MonoBehaviour
     [SerializeField]
     private PlayerInput playerInput;
 
+    public enum TargetMode
+    {
+        SectionSnapped,
+        PlayerCentered
+    }
+
+    public TargetMode targetMode { get; private set; }
+
     private Vector3 targetPos;
     private Vector3 prevTargetPos;
 
@@ -33,7 +41,19 @@ public class CameraMover : MonoBehaviour
     {
         float cameraPosZ = -10f;
 
-        SetTargetPositionWithSectionSnapped(); // section과 transition 구분하여 camera snapping
+        switch (GameManager.instance.gameState)
+        {
+            case GameManager.GameState.Playing:
+            case GameManager.GameState.Paused:
+            case GameManager.GameState.Gameover:
+                SetTargetPositionWithSectionSnapped();
+                break;
+
+            case GameManager.GameState.Cleared:
+                SetTargetPositionWithPlayerCentered();
+                break;
+        }
+
         LimitCameraMovementLeftsideAndDownside();
         targetPos.z = cameraPosZ;
     }
@@ -110,6 +130,8 @@ public class CameraMover : MonoBehaviour
         {
             targetPos.y = (2 * zoneNumY * (screenHeight - edgeHeight) + edgeHeight) / 2f;
         }
+
+        targetMode = TargetMode.SectionSnapped;
     }
 
     private void SetTargetPositionWithPlayerCentered() // deprecated
@@ -126,6 +148,8 @@ public class CameraMover : MonoBehaviour
         {
             targetPos = playerTransform.position;
         }
+
+        targetMode = TargetMode.PlayerCentered;
     }
 
     public bool HasTargetPositionChanged()
