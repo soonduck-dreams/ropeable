@@ -10,7 +10,7 @@ public class SaveLoadManager : MonoBehaviour
     private PlayfabManager playfabManager;
 
     public static SaveLoadManager instance;
-    public readonly static bool allowToSaveAndLoadOnline = true;
+    public readonly static bool allowToSaveAndLoadOnline = false;
 
     private void Awake()
     {

@@ -149,10 +149,15 @@ public class GameManager : MonoBehaviour
 
     public void UnpauseGame()
     {
-        gameState = GameState.Playing;
+        if (gameState == GameState.Paused)
+        {
+            gameState = GameState.Playing;
+
+        }
+
         Time.timeScale = 1f;
 
-        if (playerRopeShooter.timeMeasurer != null)
+        if (playerRopeShooter.timeMeasurer != null && playerRopeShooter.numRopeUsedToClear > 0)
         {
             playerRopeShooter.timeMeasurer.StartMeasure();
         }

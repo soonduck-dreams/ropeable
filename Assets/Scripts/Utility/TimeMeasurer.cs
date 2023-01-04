@@ -20,16 +20,31 @@ public class TimeMeasurer
 
     public float CheckMeasure()
     {
+        if (!_stopwatch.IsRunning)
+        {
+            return 0f;
+        }
+
         return _stopwatch.ElapsedMilliseconds / 1000f;
     }
 
     public void PauseMeasure()
     {
+        if (!_stopwatch.IsRunning)
+        {
+            return;
+        }
+
         _stopwatch.Stop();
     }
 
     public float StopMeasure()
     {
+        if (!_stopwatch.IsRunning)
+        {
+            return 0f;
+        }
+
         long maxMilliseconds = 900000; // 900000ms = 900s = 15m
 
         _stopwatch.Stop();

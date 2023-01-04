@@ -23,7 +23,24 @@ public class PlayerRopeShooter : MonoBehaviour
     private float lastRopeShootTime;
     
     public int numRopeUsedToClear { get; private set; }
-    public float secondsTakenToClear { get; private set; }
+    private float _secondsTakenToClear;
+    public float secondsTakenToClear
+    {
+        get
+        {
+            if (GameManager.instance.gameState == GameManager.GameState.Cleared)
+            {
+                return _secondsTakenToClear;
+            }
+
+            return timeMeasurer.CheckMeasure();
+        }
+
+        private set
+        {
+            _secondsTakenToClear = value;
+        }
+    }
 
     private IRopeable ropeHangObject;
 

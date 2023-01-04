@@ -17,13 +17,13 @@ public class LevelUIManager : MonoBehaviour
     private TMP_Text clearText;
 
     [SerializeField]
-    private TMP_Text levelText;
+    private TMP_Text clearLevelText;
 
     [SerializeField]
-    private TMP_Text ropesUsedText;
+    private TMP_Text clearRopesUsedText;
 
     [SerializeField]
-    private TMP_Text timeTakenText;
+    private TMP_Text clearTimeTakenText;
 
     [SerializeField]
     private GameObject ropesRewardedArea;
@@ -41,7 +41,16 @@ public class LevelUIManager : MonoBehaviour
     private GameObject pauseButton;
 
     [SerializeField]
-    private TMP_Text descriptionText;
+    private TMP_Text pauseLevelText;
+
+    [SerializeField]
+    private TMP_Text pauseRopesUsedText;
+
+    [SerializeField]
+    private TMP_Text pauseTimeTakenText;
+
+    [SerializeField]
+    private TMP_Text pauseItemGottenText;
 
     [SerializeField]
     private PlayerRopeShooter playerRopeShooter;
@@ -88,10 +97,14 @@ public class LevelUIManager : MonoBehaviour
         clearUI.SetActive(true);
     }
 
-    public void ShowPauseUI()
+    public void ShowPauseUI(int ropeUsedToClear, float secondsTakenToClear, int itemGotten)
     {
         GameManager.instance.PauseGame();
-        SetDescriptionText(playerRopeShooter.numRopeUsedToClear, GameManager.instance.score);
+        pauseLevelText.text = "Level " + LevelInfoManager.instance.curLevel.ToString();
+        pauseRopesUsedText.text = ropeUsedToClear.ToString();
+        pauseTimeTakenText.text = secondsTakenToClear.ToString() + "s";
+        pauseItemGottenText.text = itemGotten.ToString() + "/3";
+        
         pauseUI.SetActive(true);
     }
 
@@ -106,17 +119,17 @@ public class LevelUIManager : MonoBehaviour
         levelTextBuilder.Append("Level ");
         levelTextBuilder.Append(LevelInfoManager.instance.curLevel.ToString());
 
-        levelText.text = levelTextBuilder.ToString();
+        clearLevelText.text = levelTextBuilder.ToString();
     }
 
     private void SetRopeUsedText(int ropeUsedToClear)
     {
-        ropesUsedText.text = ropeUsedToClear.ToString();
+        clearRopesUsedText.text = ropeUsedToClear.ToString();
     }
 
     private void SetTimeTakenText(float secondsTakenToClear)
     {
-        timeTakenText.text = secondsTakenToClear.ToString() + "s";
+        clearTimeTakenText.text = secondsTakenToClear.ToString() + "s";
     }
 
     private void SetRopeRewardedText()
@@ -130,21 +143,12 @@ public class LevelUIManager : MonoBehaviour
         bestRecordImage.SetActive(isPersonalBest);
     }
 
-    private void SetDescriptionText(int ropeUsed, int score)
+    public void OnPauseButton()
     {
-        descriptionTextBuilder.Clear();
-        descriptionTextBuilder.Append("Level ");
-        descriptionTextBuilder.Append(LevelInfoManager.instance.curLevel.ToString());
-        descriptionTextBuilder.Append("\nRopes used: ");
-        descriptionTextBuilder.Append(ropeUsed);
-        descriptionTextBuilder.Append("\nSushi gotten: ");
-        descriptionTextBuilder.Append(score);
-        descriptionTextBuilder.Append("/3");
-
-        descriptionText.text = descriptionTextBuilder.ToString();
+        ShowPauseUI(playerRopeShooter.numRopeUsedToClear, playerRopeShooter.secondsTakenToClear, GameManager.instance.score);
     }
 
-    public void LeaderboardButton()
+    public void OnLeaderboardButton()
     {
         if (SaveLoadManager.allowToSaveAndLoadOnline)
         {
