@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,13 @@ public class PlayerRopeShooter : MonoBehaviour
 
     [HideInInspector]
     public TimeMeasurer timeMeasurer;
+
+    public enum RaycastResult
+    {
+        RopeableObject,
+        NotRopeableObject,
+        NoObject
+    }
 
     private PlayerInput playerInput;
     private PlayerMover playerMover;
@@ -69,8 +77,10 @@ public class PlayerRopeShooter : MonoBehaviour
 
     private void TryToShootRope(Vector3 clickPos)
     {
-        Vector3 playerPos = transform.position + (clickPos - transform.position).normalized * (transform.localScale.x * 0.5f + 0.01f);
-        float outerThreshold = 0f;
+        IRopeable ropeable;
+        IPositionLocalizer positionLocalizer;
+        RaycastHit2D hit;
+
         float coolTime = 0.3f;
 
         // 쿨타임 설정
@@ -79,24 +89,20 @@ public class PlayerRopeShooter : MonoBehaviour
             return;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(playerPos, (clickPos - playerPos).normalized);
-        if (hit.collider != null)
+        switch (PerformRaycast(clickPos, out ropeable, out positionLocalizer, out hit))
         {
-            IRopeable ropeable = hit.collider.GetComponent<IRopeable>();
-            IPositionLocalizer positionLocalizer = hit.collider.GetComponent<IPositionLocalizer>();
-
-            if (cameraMover.isOutOfCamera(hit.point, outerThreshold))
-            {
-                return;
-            }
-
-            ParticleManager.instance.PlayParticle(ropeShootParticlePrefab, hit.point);
-
-            if (ropeable != null)
-            {
+            case RaycastResult.RopeableObject:
+                ParticleManager.instance.PlayParticle(ropeShootParticlePrefab, hit.point);
                 ShootRope(hit, ropeable, positionLocalizer);
                 ChangePlayerMovementByTerrainType(ropeable.GetTerrainType());
-            }
+                break;
+
+            case RaycastResult.NotRopeableObject:
+                ParticleManager.instance.PlayParticle(ropeShootParticlePrefab, hit.point);
+                break;
+
+            case RaycastResult.NoObject:
+                break;
         }
     }
 
@@ -171,15 +177,6 @@ public class PlayerRopeShooter : MonoBehaviour
         ropeHangObject = ropeable;
     }
 
-    // deprecated
-    private void PlayRopeShootParticle(RaycastHit2D hit)
-    {
-        GameObject particleObject = Instantiate(ropeShootParticlePrefab, hit.point, Quaternion.identity);
-        ParticleSystem particleSystem = particleObject.GetComponent<ParticleSystem>();
-
-        particleSystem.Play();
-    }
-
     public bool IsRopeShooted()
     {
         return rope.enabled;
@@ -205,4 +202,69 @@ public class PlayerRopeShooter : MonoBehaviour
     {
         secondsTakenToClear = timeMeasurer.StopMeasure();
     }
+
+    public RaycastResult PerformRaycast(Vector3 endPos)
+    {
+        Vector3 playerPos = transform.position + (endPos - transform.position).normalized * (transform.localScale.x * 0.5f + 0.01f);
+        float outerThreshold = 0f;
+
+        RaycastHit2D hit = Physics2D.Raycast(playerPos, (endPos - playerPos).normalized);
+
+        if (hit.collider != null)
+        {
+            if (cameraMover.isOutOfCamera(hit.point, outerThreshold))
+            {
+                return RaycastResult.NoObject;
+            }
+
+            IRopeable ropeable = hit.collider.GetComponent<IRopeable>();
+
+            if (ropeable == null)
+            {
+                return RaycastResult.NotRopeableObject;
+            }
+
+            return RaycastResult.RopeableObject;
+        }
+
+        return RaycastResult.NoObject;
+    }
+
+    private RaycastResult PerformRaycast(Vector3 endPos, out IRopeable ropeableResult, out IPositionLocalizer positionLocalizerResult, out RaycastHit2D hitResult)
+    {
+        Vector3 playerPos = transform.position + (endPos - transform.position).normalized * (transform.localScale.x * 0.5f + 0.01f);
+        float outerThreshold = 0f;
+
+        RaycastHit2D hit = Physics2D.Raycast(playerPos, (endPos - playerPos).normalized);
+
+        hitResult = hit;
+
+        if (hit.collider != null)
+        {
+            if (cameraMover.isOutOfCamera(hit.point, outerThreshold))
+            {
+                ropeableResult = null;
+                positionLocalizerResult = null;
+                return RaycastResult.NoObject;
+            }
+
+            IRopeable ropeable = hit.collider.GetComponent<IRopeable>();
+
+            if (ropeable == null)
+            {
+                ropeableResult = null;
+                positionLocalizerResult = null;
+                return RaycastResult.NotRopeableObject;
+            }
+
+            ropeableResult = ropeable;
+            positionLocalizerResult = hit.collider.GetComponent<IPositionLocalizer>();
+            return RaycastResult.RopeableObject;
+        }
+
+        ropeableResult = null;
+        positionLocalizerResult = null;
+        return RaycastResult.NoObject;
+    }
+
 }
