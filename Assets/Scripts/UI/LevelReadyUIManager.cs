@@ -7,33 +7,46 @@ using UnityEngine.SceneManagement;
 
 public class LevelReadyUIManager : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text levelNo;
-
-    [SerializeField]
-    private TMP_Text levelTitle;
-
-    [SerializeField]
-    private Image starClearImage;
-
-    [SerializeField]
-    private TMP_Text bestRecord;
-
-    [SerializeField]
-    private Button playButton;
+    [SerializeField] private GameObject homeButton;
+    [SerializeField] private TMP_Text levelNo;
+    [SerializeField] private TMP_Text levelTitle;
+    [SerializeField] private Button playButton;
+    [SerializeField] private GameObject unclearedCase;
+    [SerializeField] private GameObject clearedCase;
+    [SerializeField] private TMP_Text ropeText;
+    [SerializeField] private TMP_Text timeText;
+    [SerializeField] private TMP_Text starClearText;
 
     public void Set(int levelNo, string levelTitle, bool isStarCleared, int leastRopeUsed, float shortestSecondsTaken)
     {
         this.levelNo.text = "Level " + levelNo.ToString();
         this.levelTitle.text = levelTitle;
-        this.starClearImage.gameObject.SetActive(isStarCleared);
-        this.bestRecord.text = leastRopeUsed.ToString() + " ropes used\n" + string.Format("{0:F3}", shortestSecondsTaken) + "sec taken";
+
+        if (leastRopeUsed == 0)
+        {
+            clearedCase.SetActive(false);
+            unclearedCase.SetActive(true);
+        }
+        else
+        {
+            ropeText.text = leastRopeUsed.ToString();
+            timeText.text = shortestSecondsTaken.ToString() + "s";
+
+            if (isStarCleared)
+            {
+                starClearText.text = "STAR CLEARED!";
+            }
+
+            unclearedCase.SetActive(false);
+            clearedCase.SetActive(true);
+        }
 
         playButton.onClick.AddListener(PlayLevel);
     }
 
     public void Show()
     {
+        homeButton.SetActive(false);
         gameObject.SetActive(true);
     }
 
