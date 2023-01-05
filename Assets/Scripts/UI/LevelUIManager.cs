@@ -10,50 +10,26 @@ public class LevelUIManager : MonoBehaviour
 {
     public static LevelUIManager instance;
 
-    [SerializeField]
-    private GameObject clearUI;
+    [SerializeField] private GameObject clearUI;
+    [SerializeField] private TMP_Text clearText;
+    [SerializeField] private TMP_Text clearLevelText;
+    [SerializeField] private TMP_Text clearRopesUsedText;
+    [SerializeField] private TMP_Text clearTimeTakenText;
+    [SerializeField] private GameObject ropesRewardedArea;
+    [SerializeField] private TMP_Text ropesRewardedText;
+    [SerializeField] private GameObject bestRecordImage;
 
-    [SerializeField]
-    private TMP_Text clearText;
+    [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject pauseButton;
+    [SerializeField] private TMP_Text pauseLevelText;
+    [SerializeField] private TMP_Text pauseRopesUsedText;
+    [SerializeField] private TMP_Text pauseTimeTakenText;
+    [SerializeField] private TMP_Text pauseItemGottenText;
 
-    [SerializeField]
-    private TMP_Text clearLevelText;
+    [SerializeField] private GameObject leaderboardUI;
+    [SerializeField] private TMP_Text leaderboardTitleText;
 
-    [SerializeField]
-    private TMP_Text clearRopesUsedText;
-
-    [SerializeField]
-    private TMP_Text clearTimeTakenText;
-
-    [SerializeField]
-    private GameObject ropesRewardedArea;
-
-    [SerializeField]
-    private TMP_Text ropesRewardedText;
-
-    [SerializeField]
-    private GameObject bestRecordImage;
-
-    [SerializeField]
-    private GameObject pauseUI;
-
-    [SerializeField]
-    private GameObject pauseButton;
-
-    [SerializeField]
-    private TMP_Text pauseLevelText;
-
-    [SerializeField]
-    private TMP_Text pauseRopesUsedText;
-
-    [SerializeField]
-    private TMP_Text pauseTimeTakenText;
-
-    [SerializeField]
-    private TMP_Text pauseItemGottenText;
-
-    [SerializeField]
-    private PlayerRopeShooter playerRopeShooter;
+    [SerializeField] private PlayerRopeShooter playerRopeShooter;
 
     public TMP_Text debugText;
 
@@ -112,6 +88,7 @@ public class LevelUIManager : MonoBehaviour
     {
         GameManager.instance.UnpauseGame();
         pauseUI.SetActive(false);
+        leaderboardUI.SetActive(false);
     }
 
     private void SetLevelText()
@@ -153,6 +130,9 @@ public class LevelUIManager : MonoBehaviour
         if (SaveLoadManager.allowToSaveAndLoadOnline)
         {
             SaveLoadManager.instance.RequestToGetLeaderboard(LevelInfoManager.instance.curLevel);
+            leaderboardTitleText.text = string.Format("who's the most ROPABLE in LEVEL {0}?",
+                                                                LevelInfoManager.instance.curLevel);
+            leaderboardUI.SetActive(true);
         }
     }
 }

@@ -16,8 +16,7 @@ public class LevelSelectButton : MonoBehaviour
     private TMP_Text levelNoText;
     private Button button;
 
-    [SerializeField]
-    private LevelReadyUIManager levelReadyUI;
+    [SerializeField] private LevelReadyUIManager levelReadyUI;
 
     private void Awake()
     {

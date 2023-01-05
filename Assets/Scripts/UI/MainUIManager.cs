@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,20 +9,13 @@ public class MainUIManager : MonoBehaviour
 {
     public static MainUIManager instance;
 
-    [SerializeField]
-    private GameObject mainScreen;
-
-    [SerializeField]
-    private GameObject levelSelectScreen;
-
-    [SerializeField]
-    private GameObject gridContent;
-
-    [SerializeField]
-    private GameObject buttonPrefab;
-
-    [SerializeField]
-    private LevelReadyUIManager levelReadyUI;
+    [SerializeField] private GameObject mainScreen;
+    [SerializeField] private GameObject levelSelectScreen;
+    [SerializeField] private GameObject gridContent;
+    [SerializeField] private GameObject buttonPrefab;
+    [SerializeField] private LevelReadyUIManager levelReadyUI;
+    [SerializeField] private GameObject leaderboardUI;
+    [SerializeField] private TMP_Text leaderboardTitleText;
 
     private int lastLevelCleared;
     private bool[] isStarCleared;
@@ -82,6 +76,17 @@ public class MainUIManager : MonoBehaviour
             buttonInfo.SetButtonColor(buttonInfo.canPlay);
             buttonInfo.Display();
             buttonInfo.SetClickEvent();
+        }
+    }
+
+    public void OnLeaderboardButton()
+    {
+        if (SaveLoadManager.allowToSaveAndLoadOnline)
+        {
+            SaveLoadManager.instance.RequestToGetLeaderboard(levelReadyUI.GetLevel());
+            leaderboardTitleText.text = string.Format("who's the most ROPABLE in LEVEL {0}?",
+                                                                levelReadyUI.GetLevel());
+            leaderboardUI.SetActive(true);
         }
     }
 

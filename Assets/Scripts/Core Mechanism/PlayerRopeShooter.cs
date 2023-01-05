@@ -6,17 +6,11 @@ using UnityEngine;
 
 public class PlayerRopeShooter : MonoBehaviour
 {
-    [SerializeField]
-    private Rope rope;
+    [SerializeField] private Rope rope;
+    [SerializeField] private CameraMover cameraMover;
+    [SerializeField] private GameObject ropeShootParticlePrefab;
 
-    [SerializeField]
-    private CameraMover cameraMover;
-
-    [SerializeField]
-    private GameObject ropeShootParticlePrefab;
-
-    [HideInInspector]
-    public TimeMeasurer timeMeasurer;
+    [HideInInspector] public TimeMeasurer timeMeasurer;
 
     public enum RaycastResult
     {

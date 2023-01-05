@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Shrinker : MonoBehaviour
 {
-    [SerializeField]
-    private float magnitude;
-
-    [SerializeField]
-    private float speed;
+    [SerializeField] private float magnitude;
+    [SerializeField] private float speed;
 
     private float shrinkScale;
     private float amplitudeMultiplier;

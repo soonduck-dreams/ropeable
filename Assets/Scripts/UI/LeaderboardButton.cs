@@ -10,6 +10,6 @@ public class LeaderboardButton : MonoBehaviour
     private void Awake()
     {
         button = GetComponent<Button>();
-        button.interactable = false;
+        button.interactable = true;
     }
 }

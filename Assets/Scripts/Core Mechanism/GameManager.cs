@@ -7,20 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerRopeShooter playerRopeShooter;
-
-    [SerializeField]
-    private PlayerInput playerInput;
-
-    [SerializeField]
-    private PlayerHealth playerHealth;
-
-    [SerializeField]
-    private SceneTransition sceneTransition;
-
-    [SerializeField]
-    private CameraMover cameraMover;
+    [SerializeField] private PlayerRopeShooter playerRopeShooter;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private SceneTransition sceneTransition;
+    [SerializeField] private CameraMover cameraMover;
 
     public static GameManager instance;
 

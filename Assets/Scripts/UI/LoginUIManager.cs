@@ -9,26 +9,13 @@ using UnityEngine.UI;
 
 public class LoginUIManager : MonoBehaviour
 {
-    [SerializeField]
-    private PlayfabManager playfabManager;
-
-    [SerializeField]
-    private SceneTransition sceneTransition;
-
-    [SerializeField]
-    private GameObject standby;
-
-    [SerializeField]
-    private GameObject createNewAccount;
-
-    [SerializeField]
-    private GameObject loginSuccessful;
-
-    [SerializeField]
-    private TMP_InputField usernameInputField;
-
-    [SerializeField]
-    private TMP_Text loginSuccessfulText;
+    [SerializeField] private PlayfabManager playfabManager;
+    [SerializeField] private SceneTransition sceneTransition;
+    [SerializeField] private GameObject standby;
+    [SerializeField] private GameObject createNewAccount;
+    [SerializeField] private GameObject loginSuccessful;
+    [SerializeField] private TMP_InputField usernameInputField;
+    [SerializeField] private TMP_Text loginSuccessfulText;
 
     private void Start()
     {

@@ -4,12 +4,15 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using Newtonsoft.Json;
+using TMPro;
 using System;
 
 public class PlayfabManager : MonoBehaviour
 {
-    [SerializeField]
-    private LoginUIManager loginUIManager;
+    [SerializeField] private LoginUIManager loginUIManager;
+
+    [SerializeField] private GameObject leaderboardRowPrefab;
+    [SerializeField] private Transform leaderboardRowsParent;
 
     // 데모용 저장 데이터를 나타내는 키. 정식판에서는 DEMO_를 뺄 예정
     private readonly string userLevelDataKey = "DEMO_UserLevelData";
@@ -158,9 +161,22 @@ public class PlayfabManager : MonoBehaviour
 
     private void OnReceiveLeaderboard(GetLeaderboardResult result)
     {
+        foreach (Transform item in leaderboardRowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+
         foreach (var item in result.Leaderboard)
         {
-            Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
+            GameObject row = Instantiate(leaderboardRowPrefab, leaderboardRowsParent);
+            TMP_Text[] rowInfo = row.GetComponentsInChildren<TMP_Text>();
+
+            rowInfo[0].text = "#" + (item.Position + 1).ToString();
+            rowInfo[1].text = item.DisplayName;
+            rowInfo[2].text = (item.StatValue / 1000000).ToString();
+            rowInfo[3].text = ((item.StatValue % 1000000) / 1000f).ToString() + "s";
         }
+
+        Debug.Log("PlayfabManager: 리더보드 정보를 가져왔습니다.");
     }
 }

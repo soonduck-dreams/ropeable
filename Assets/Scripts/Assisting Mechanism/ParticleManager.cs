@@ -45,12 +45,17 @@ public class ParticleManager : MonoBehaviour
         particleSystem.Play();
     }
 
-    public void PlayParticleForSeconds(GameObject particlePrefab, GameObject targetPrefab, float seconds)
+    public void PlayParticleForSeconds(GameObject particlePrefab, GameObject targetPrefab, float seconds, float period)
     {
-        StartCoroutine(PlayParticleForSecondsCoroutine(particlePrefab, targetPrefab, seconds));
+        StartCoroutine(PlayParticleForSecondsCoroutine(particlePrefab, targetPrefab, seconds, period, 0f));
     }
 
-    private IEnumerator PlayParticleForSecondsCoroutine(GameObject particlePrefab, GameObject targetPrefab, float seconds)
+    public void PlayParticleForSeconds(GameObject particlePrefab, GameObject targetPrefab, float seconds, float period, float rotationZ)
+    {
+        StartCoroutine(PlayParticleForSecondsCoroutine(particlePrefab, targetPrefab, seconds, period, rotationZ));
+    }
+
+    private IEnumerator PlayParticleForSecondsCoroutine(GameObject particlePrefab, GameObject targetPrefab, float seconds, float period, float rotationZ)
     {
         float beginTime = Time.time;
         Vector3 pos;
@@ -59,8 +64,8 @@ public class ParticleManager : MonoBehaviour
         {
             pos = targetPrefab.transform.position;
 
-            PlayParticle(particlePrefab, pos);
-            yield return new WaitForSeconds(0.1f);
+            PlayParticle(particlePrefab, pos, rotationZ);
+            yield return new WaitForSeconds(period);
         }
     }
 }

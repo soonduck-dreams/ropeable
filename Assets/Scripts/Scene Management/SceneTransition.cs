@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SceneTransition : MonoBehaviour
 {
-    [SerializeField]
-    private Animator crossfade;
+    [SerializeField] private Animator crossfade;
 
     public enum EndWith
     {
@@ -13,8 +12,7 @@ public class SceneTransition : MonoBehaviour
         Crossfade
     }
 
-    [HideInInspector]
-    public static EndWith endWith = EndWith.Nothing;
+    [HideInInspector] public static EndWith endWith = EndWith.Nothing;
 
     public delegate void LoadSceneAction();
 

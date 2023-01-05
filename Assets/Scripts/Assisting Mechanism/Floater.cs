@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Floater : MonoBehaviour
 {
-    [SerializeField]
-    private float halfCycleTime;
-
-    [SerializeField]
-    private float moveSpeed;
+    [SerializeField] private float halfCycleTime;
+    [SerializeField] private float moveSpeed;
 
     private float currentTime;
     

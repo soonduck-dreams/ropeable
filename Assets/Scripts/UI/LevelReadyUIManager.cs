@@ -16,11 +16,16 @@ public class LevelReadyUIManager : MonoBehaviour
     [SerializeField] private TMP_Text ropeText;
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private TMP_Text starClearText;
+    [SerializeField] private GameObject leaderboardUI;
+
+    private int rawLevelNo;
 
     public void Set(int levelNo, string levelTitle, bool isStarCleared, int leastRopeUsed, float shortestSecondsTaken)
     {
         this.levelNo.text = "Level " + levelNo.ToString();
         this.levelTitle.text = levelTitle;
+
+        rawLevelNo = levelNo;
 
         if (leastRopeUsed == 0)
         {
@@ -47,6 +52,7 @@ public class LevelReadyUIManager : MonoBehaviour
     public void Show()
     {
         homeButton.SetActive(false);
+        leaderboardUI.SetActive(false);
         gameObject.SetActive(true);
     }
 
@@ -54,5 +60,10 @@ public class LevelReadyUIManager : MonoBehaviour
     {
         SceneLoader.LoadSceneWithLoadingScreen(levelNo.text.Replace(' ', '_'));
         //SceneManager.LoadScene(levelNo.text.Replace(' ', '_'));
+    }
+
+    public int GetLevel()
+    {
+        return rawLevelNo;
     }
 }

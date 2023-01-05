@@ -31,6 +31,8 @@ public class CameraMover : MonoBehaviour
     private Vector3 targetPos;
     private Vector3 prevTargetPos;
 
+    private Coroutine shakeCoroutine;
+
     private void Update()
     {
         SetTargetPosition();
@@ -171,10 +173,15 @@ public class CameraMover : MonoBehaviour
 
     public void ShakeCamera(float seconds, float magnitude)
     {
-        StartCoroutine(ShakeCameraCoroutine(seconds, magnitude));
+        StartCoroutine(ShakeCameraCoroutine(seconds, magnitude, magnitude));
     }
 
-    private IEnumerator ShakeCameraCoroutine(float seconds, float magnitude)
+    public void ShakeCamera(float seconds, float magnitudeX, float magnitudeY)
+    {
+        shakeCoroutine = StartCoroutine(ShakeCameraCoroutine(seconds, magnitudeX, magnitudeY));
+    }
+
+    private IEnumerator ShakeCameraCoroutine(float seconds, float magnitudeX, float magnitudeY)
     {
         TimeMeasurer timer = new TimeMeasurer();
         Vector3 originalPos;
@@ -183,12 +190,21 @@ public class CameraMover : MonoBehaviour
         timer.StartMeasure();
         originalPos = transform.position;
 
+        float randomMin = 0.5f; // 최소 shake 계수 (0.0 ~ 1.0)
+        float randomX = Random.value;
+        float randomY = Random.value;
+
+        float shakeX = (randomX > randomMin ? randomX : randomMin) * magnitudeX * shakeSign;
+        float shakeY = (randomY > randomMin ? randomY : randomMin) * magnitudeY * shakeSign;
+
         while (timer.CheckMeasure() < seconds)
         {
-            float randomX = Random.value * magnitude * shakeSign;
-            float randomY = Random.value * magnitude * shakeSign;
+            if (HasTargetPositionChanged())
+            {
+                StopCoroutine(shakeCoroutine);
+            }
 
-            transform.position = originalPos + new Vector3(randomX, randomY, 0f);
+            transform.position = originalPos + new Vector3(shakeX, shakeY, 0f);
             shakeSign *= -1;
 
             yield return null;

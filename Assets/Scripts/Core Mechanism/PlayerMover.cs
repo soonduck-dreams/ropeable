@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject playerRocketParticlePrefab;
+    [SerializeField] private GameObject playerRocketParticlePrefab;
+    [SerializeField] private GameObject playerTrailParticlePrefab;
+    [SerializeField] private GameObject playerSpeedyParticlePrefab;
 
-    [SerializeField]
-    private GameObject playerTrailParticlePrefab;
-
-    [SerializeField]
-    private GameObject playerSpeedyParticlePrefab;
+    [SerializeField] private CameraMover cameraMover;
 
     private float moveSpeedHorizontal;
     private float basicGravity;
@@ -69,14 +66,18 @@ public class PlayerMover : MonoBehaviour
     private void MoveScroll(float inputSignal)
     {
         float direction = inputSignal > 0 ? 1 : -1;
+        float rotationZ = inputSignal > 0 ? 180f : 0f;
+        Vector3 position = inputSignal > 0 ? transform.position + 0.5f * Vector3.down
+                                            : transform.position + 0.5f * Vector3.up;           
         float adjustment = 20f;
 
         StunInAir();
         playerRigidbody.AddForce(adjustment * direction * Vector2.up, ForceMode2D.Impulse);
         playerRopeShooter.CutRope(Vector3.zero);
 
-        ParticleManager.instance.PlayParticle(playerRocketParticlePrefab, transform.position);
-        ParticleManager.instance.PlayParticleForSeconds(playerTrailParticlePrefab, gameObject, 0.5f);
+        ParticleManager.instance.PlayParticle(playerRocketParticlePrefab, position);
+        ParticleManager.instance.PlayParticleForSeconds(playerTrailParticlePrefab, gameObject, 0.2f, 0.01f, rotationZ);
+        cameraMover.ShakeCamera(0.01f, 0f, 1f);
     }
 
     public void SetPlayerGravity(float gravity)
