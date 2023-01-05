@@ -12,7 +12,7 @@ public class SceneTransition : MonoBehaviour
         Crossfade
     }
 
-    [HideInInspector] public static EndWith endWith = EndWith.Nothing;
+    [HideInInspector] public static EndWith endWith = EndWith.Crossfade;
 
     public delegate void LoadSceneAction();
 

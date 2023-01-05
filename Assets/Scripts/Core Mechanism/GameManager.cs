@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private SceneTransition sceneTransition;
     [SerializeField] private CameraMover cameraMover;
+    [SerializeField] private GlobalLightManager globalLightManager;
 
     public static GameManager instance;
 
@@ -43,11 +44,6 @@ public class GameManager : MonoBehaviour
         {
             RetryLevel();
         }
-
-        if (playerInput.keyX)
-        {
-            PlayerPrefs.DeleteAll();
-        }
     }
 
     private void Start()
@@ -64,6 +60,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        globalLightManager.GlowUp(1.2f, 0.05f);
         playerHealth.PlayDieParticle();
         playerHealth.DestroyPlayer();
         cameraMover.ShakeCamera(0.05f, 3f);
@@ -117,7 +114,21 @@ public class GameManager : MonoBehaviour
 
     public void RetryLevel()
     {
-        Restart();
+        switch (gameState)
+        {
+            case GameState.Playing:
+            case GameState.Paused:
+                LevelUIManager.instance.ClosePauseUI();
+                OnPlayerDie();
+                break;
+
+            case GameState.Cleared:
+                Restart();
+                break;
+
+            case GameState.Gameover:
+                break;
+        }        
     }
 
     public void GoToMainMenu()

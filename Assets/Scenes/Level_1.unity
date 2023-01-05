@@ -517,6 +517,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3395752126564506042, guid: c19bbc8bd45498a4c8df2ad1d23964e7, type: 3}
   m_PrefabInstance: {fileID: 3395752127088155166}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &576525298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8659666209052880775, guid: ecc0866e14cb9a746a39c83072e78f5b, type: 3}
+  m_PrefabInstance: {fileID: 8659666207962076727}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &576525301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576525298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f0648c4c5f97b48946b8388efc8e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &610436476 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 610436476, guid: ad76cc1525947ce429733589aa846336, type: 3}
@@ -2499,6 +2516,10 @@ PrefabInstance:
       propertyPath: playerRopeShooter
       value: 
       objectReference: {fileID: 1334083158}
+    - target: {fileID: 5256003346942239484, guid: b19f75af9a438834b902c2bfe428c062, type: 3}
+      propertyPath: globalLightManager
+      value: 
+      objectReference: {fileID: 576525301}
     - target: {fileID: 5256003346942239485, guid: b19f75af9a438834b902c2bfe428c062, type: 3}
       propertyPath: m_Name
       value: Game Manager

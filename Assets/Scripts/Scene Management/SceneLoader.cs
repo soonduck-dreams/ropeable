@@ -13,9 +13,6 @@ public class SceneLoader : MonoBehaviour
     [SerializeField]
     private Slider slider;
 
-    [SerializeField]
-    private TMP_Text loadingText;
-
     public static void LoadSceneWithLoadingScreen(string sceneName)
     {
         SceneLoader.sceneName = sceneName;
@@ -36,7 +33,6 @@ public class SceneLoader : MonoBehaviour
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
 
             slider.value = progressValue;
-            loadingText.text = "LOADING...";
 
             yield return null;
         }

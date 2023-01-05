@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class PlayerHealth : LivingThing
 {
-    [SerializeField]
-    private GameObject playerDieParticleBlue;
-
-    [SerializeField]
-    private GameObject playerDieParticleYellow;
-
-    [SerializeField]
-    private GameObject playerFollower;
+    [SerializeField] private GameObject playerDieParticleBlue;
+    [SerializeField] private GameObject playerDieParticleYellow;
+    [SerializeField] private GameObject playerFollower;
 
     private SpriteRenderer spriteRenderer;
     private PlayerRopeShooter playerRopeShooter;
