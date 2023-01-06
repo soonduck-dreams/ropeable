@@ -344,6 +344,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
+      propertyPath: elapsedTimeText
+      value: 
+      objectReference: {fileID: 393978089}
+    - target: {fileID: 6748074981056412775, guid: 664dfd98e9e5ed548a7ec492e99a4753, type: 3}
       propertyPath: playerRopeShooter
       value: 
       objectReference: {fileID: 1334083158}
@@ -538,6 +542,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1018048604373358727, guid: ad76cc1525947ce429733589aa846336, type: 3}
   m_PrefabInstance: {fileID: 1176019868}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &393978089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3127466016907171392, guid: ad76cc1525947ce429733589aa846336, type: 3}
+  m_PrefabInstance: {fileID: 1176019868}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &433681205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3791719692042981086, guid: 2519328c9691924428e3c9c798ca0b18, type: 3}

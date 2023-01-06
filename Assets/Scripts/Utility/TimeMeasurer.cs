@@ -8,6 +8,8 @@ public class TimeMeasurer
 {
     private Stopwatch _stopwatch;
 
+    long maxMilliseconds = 900000; // 900000ms = 900s = 15m
+
     public TimeMeasurer()
     {
         _stopwatch = new Stopwatch();
@@ -25,7 +27,12 @@ public class TimeMeasurer
             return 0f;
         }
 
-        return _stopwatch.ElapsedMilliseconds / 1000f;
+        if (_stopwatch.ElapsedMilliseconds <= maxMilliseconds)
+        {
+            return _stopwatch.ElapsedMilliseconds / 1000f;
+        }
+
+        return maxMilliseconds / 1000f;
     }
 
     public void PauseMeasure()
@@ -44,8 +51,6 @@ public class TimeMeasurer
         {
             return 0f;
         }
-
-        long maxMilliseconds = 900000; // 900000ms = 900s = 15m
 
         _stopwatch.Stop();
 

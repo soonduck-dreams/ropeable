@@ -10,6 +10,8 @@ public class LevelUIManager : MonoBehaviour
 {
     public static LevelUIManager instance;
 
+    [SerializeField] private TMP_Text elapsedTimeText;
+
     [SerializeField] private GameObject clearUI;
     [SerializeField] private TMP_Text clearText;
     [SerializeField] private TMP_Text clearLevelText;
@@ -55,6 +57,7 @@ public class LevelUIManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateElapsedTimeText();
         ProcessUIInput();
     }
 
@@ -150,6 +153,19 @@ public class LevelUIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             GameManager.instance.RetryLevel();
+        }
+    }
+
+    private void UpdateElapsedTimeText()
+    {
+        if (SettingsManager.displayElapsedTimeWhilePlaying
+            && GameManager.instance.gameState == GameManager.GameState.Playing)
+        {
+            elapsedTimeText.text = playerRopeShooter.secondsTakenToClear.ToString() + "s";
+        }
+        else
+        {
+            elapsedTimeText.text = "";
         }
     }
 }
