@@ -31,7 +31,14 @@ public class CameraMover : MonoBehaviour
     private Vector3 targetPos;
     private Vector3 prevTargetPos;
 
+    private float cameraPosZ = -10f;
+
     private Coroutine shakeCoroutine;
+
+    private void Start()
+    {
+        targetPos.z = cameraPosZ;
+    }
 
     private void Update()
     {
@@ -41,8 +48,6 @@ public class CameraMover : MonoBehaviour
 
     private void SetTargetPosition()
     {
-        float cameraPosZ = -10f;
-
         switch (GameManager.instance.gameState)
         {
             case GameManager.GameState.Playing:
@@ -57,7 +62,6 @@ public class CameraMover : MonoBehaviour
         }
 
         LimitCameraMovementLeftsideAndDownside();
-        targetPos.z = cameraPosZ;
     }
 
     private void MoveCamera(float speed)
@@ -151,6 +155,8 @@ public class CameraMover : MonoBehaviour
             targetPos = playerTransform.position;
         }
 
+        targetPos.z = cameraPosZ;
+
         targetMode = TargetMode.PlayerCentered;
     }
 
@@ -162,7 +168,7 @@ public class CameraMover : MonoBehaviour
             return false;
         }
 
-        if(prevTargetPos == targetPos)
+        if((prevTargetPos - targetPos).magnitude < 0.1f)
         {
             return false;
         }

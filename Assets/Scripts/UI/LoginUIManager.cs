@@ -33,7 +33,7 @@ public class LoginUIManager : MonoBehaviour
         HideStandby();
         HideCreateNewAccount();
 
-        loginSuccessfulText.text = "Welcome, " + playfabManager.username;
+        loginSuccessfulText.text = "Welcome, " + PlayfabManager.username;
         loginSuccessful.SetActive(true);
         GoToMainScene();
     }

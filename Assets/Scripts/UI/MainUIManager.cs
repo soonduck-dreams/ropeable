@@ -105,4 +105,9 @@ public class MainUIManager : MonoBehaviour
                 break;
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

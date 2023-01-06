@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
         Playing,
         Cleared,
         Paused,
-        Gameover
+        Gameover,
+        Standby
     }
     public GameState gameState { get; private set; }
 
@@ -36,14 +37,6 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-    }
-
-    private void Update()
-    {
-        if (playerInput.keyR)
-        {
-            RetryLevel();
-        }
     }
 
     private void Start()
@@ -71,6 +64,8 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.Gameover;
         SceneTransition.endWith = SceneTransition.EndWith.Crossfade;
+
+        LevelUIManager.instance.HidePauseButton();
         
         StartCoroutine(sceneTransition.CrossfadeStart(Restart, 2f));
     }
@@ -133,7 +128,8 @@ public class GameManager : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        UnpauseGame();
+        Time.timeScale = 1f;
+        gameState = GameState.Standby;
         MainUIOpenMode.openMode = MainUIOpenMode.OpenMode.LevelSelect;
         SceneManager.LoadScene("MainMenu");
     }
@@ -154,7 +150,6 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.Paused)
         {
             gameState = GameState.Playing;
-
         }
 
         Time.timeScale = 1f;

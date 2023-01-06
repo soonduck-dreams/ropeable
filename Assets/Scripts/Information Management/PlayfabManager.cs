@@ -10,6 +10,7 @@ using System;
 public class PlayfabManager : MonoBehaviour
 {
     [SerializeField] private LoginUIManager loginUIManager;
+    [SerializeField] private SettingsManager settingsManager;
 
     [SerializeField] private GameObject leaderboardRowPrefab;
     [SerializeField] private Transform leaderboardRowsParent;
@@ -17,7 +18,7 @@ public class PlayfabManager : MonoBehaviour
     // 데모용 저장 데이터를 나타내는 키. 정식판에서는 DEMO_를 뺄 예정
     private readonly string userLevelDataKey = "DEMO_UserLevelData";
 
-    public string username { get; private set; }
+    public static string username { get; private set; }
 
     public void LoginToPlayfabServer()
     {
@@ -72,6 +73,24 @@ public class PlayfabManager : MonoBehaviour
         username = result.DisplayName;
         loginUIManager.ShowLoginSuccessful();
         Debug.Log("PlayFabManager: 유저 이름을 최초 설정했습니다.");
+    }
+
+    public void ChangeUsername(string username)
+    {
+        var request = new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = username
+        };
+
+        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnChangeUsernameSuccess,
+            error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    private void OnChangeUsernameSuccess(UpdateUserTitleDisplayNameResult result)
+    {
+        username = result.DisplayName;
+        settingsManager.RefreshShownCurrentUsernameText(username);
+        Debug.Log("PlayFabManager: 유저 이름을 변경했습니다.");
     }
 
     public void SendLocalUserData(int lastLevelCleared, UserLevelData[] userLevelDataList)

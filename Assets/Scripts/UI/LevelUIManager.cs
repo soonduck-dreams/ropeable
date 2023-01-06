@@ -34,7 +34,6 @@ public class LevelUIManager : MonoBehaviour
     public TMP_Text debugText;
 
     private StringBuilder levelTextBuilder = new StringBuilder();
-    private StringBuilder descriptionTextBuilder = new StringBuilder();
 
     private void Awake()
     {
@@ -52,6 +51,11 @@ public class LevelUIManager : MonoBehaviour
         clearUI.SetActive(false);
         SetLevelText();
         SetRopeRewardedText();
+    }
+
+    private void Update()
+    {
+        ProcessUIInput();
     }
 
     public void ShowClearUI(int ropeUsedToClear, float secondsTakenToClear)
@@ -91,6 +95,11 @@ public class LevelUIManager : MonoBehaviour
         leaderboardUI.SetActive(false);
     }
 
+    public void HidePauseButton()
+    {
+        pauseButton.SetActive(false);
+    }
+    
     private void SetLevelText()
     {
         levelTextBuilder.Append("Level ");
@@ -133,6 +142,14 @@ public class LevelUIManager : MonoBehaviour
             leaderboardTitleText.text = string.Format("who's the most ROPABLE in LEVEL {0}?",
                                                                 LevelInfoManager.instance.curLevel);
             leaderboardUI.SetActive(true);
+        }
+    }
+
+    private void ProcessUIInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GameManager.instance.RetryLevel();
         }
     }
 }

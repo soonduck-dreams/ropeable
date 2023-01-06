@@ -218,10 +218,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'you CANNOT change the name after this step.
+  m_text: 'the name will be displayed on the online leaderboards.
 
-    the name will be displayed
-    on the online leaderboards.'
+    you can change
+    your name freely as long as it''s not offensive or harmful.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aee7c010bf68cdb4d957b17d2249142f, type: 2}
   m_sharedMaterial: {fileID: 608150632032640607, guid: aee7c010bf68cdb4d957b17d2249142f, type: 2}
@@ -1371,7 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
@@ -1545,7 +1545,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 11.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
