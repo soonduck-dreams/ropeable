@@ -8,12 +8,14 @@ using System.Linq;
 public class SettingsManager : MonoBehaviour
 {
     [SerializeField] private PlayfabManager playfabManager;
+    [SerializeField] private UserTraitManager userTraitManager;
 
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Slider backgroundSlider;
     [SerializeField] private Slider effectSlider;
+    [SerializeField] private Button openChangeNamePanelButton;
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_Text currentUsernameText;
     [SerializeField] private Toggle displayElapsedTimeToggle;
@@ -27,6 +29,9 @@ public class SettingsManager : MonoBehaviour
     {
         InitResolutionDropdown();
         LoadSettings();
+
+        SetCanChangeName();
+        gameObject.SetActive(false);
     }
 
     private void LoadSettings()
@@ -125,8 +130,13 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("effectVolume", volume);
     } // TODO
 
-    public void ChangeNameButton()
+    public void ConfirmChangedNameButton()
     {
+        if (usernameInputField.text.Length <= 2 || usernameInputField.text.Length >= 26)
+        {
+            return;
+        }
+
         playfabManager.ChangeUsername(usernameInputField.text);
     }
 
@@ -146,5 +156,16 @@ public class SettingsManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         LoadSettings();
+    }
+
+    private void SetCanChangeName()
+    {
+        openChangeNamePanelButton.interactable = userTraitManager.userTraitData.canChangeName;
+
+        if (!userTraitManager.userTraitData.canChangeName)
+        {
+            openChangeNamePanelButton.GetComponentInChildren<TMP_Text>().text = "name change restricted";
+            openChangeNamePanelButton.GetComponentInChildren<TMP_Text>().fontSize = 35f;
+        }
     }
 }

@@ -11,12 +11,14 @@ public class PlayfabManager : MonoBehaviour
 {
     [SerializeField] private LoginUIManager loginUIManager;
     [SerializeField] private SettingsManager settingsManager;
+    [SerializeField] private UserTraitManager userTraitManager;
 
     [SerializeField] private GameObject leaderboardRowPrefab;
     [SerializeField] private Transform leaderboardRowsParent;
 
     // 데모용 저장 데이터를 나타내는 키. 정식판에서는 DEMO_를 뺄 예정
     private readonly string userLevelDataKey = "DEMO_UserLevelData";
+    private readonly string userTraitDataKey = "DEMO_UserTraitData";
 
     public static string username { get; private set; }
 
@@ -33,7 +35,7 @@ public class PlayfabManager : MonoBehaviour
         };
 
         PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess,
-            error => Debug.LogError(error.GenerateErrorReport()));
+            OnLoginFailed);
     }
 
     private void OnLoginSuccess(LoginResult result)
@@ -55,6 +57,12 @@ public class PlayfabManager : MonoBehaviour
         {
             loginUIManager.ShowLoginSuccessful();
         }
+    }
+
+    private void OnLoginFailed(PlayFabError error)
+    {
+        Debug.Log("PlayFabManager: PlayFab 서버 로그인에 실패했습니다.");
+        loginUIManager.ShowLoginFailed();
     }
 
     public void InitUsername(string username)
@@ -93,7 +101,7 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log("PlayFabManager: 유저 이름을 변경했습니다.");
     }
 
-    public void SendLocalUserData(int lastLevelCleared, UserLevelData[] userLevelDataList)
+    public void SendUserLevelData(int lastLevelCleared, UserLevelData[] userLevelDataList)
     {
         var request = new UpdateUserDataRequest
         {
@@ -104,45 +112,45 @@ public class PlayfabManager : MonoBehaviour
             }
         };
 
-        PlayFabClientAPI.UpdateUserData(request, OnSendLocalUserDataSuccess,
+        PlayFabClientAPI.UpdateUserData(request, OnSendUserLevelDataSuccess,
             error => Debug.LogError(error.GenerateErrorReport()));
     }
 
-    private void OnSendLocalUserDataSuccess(UpdateUserDataResult result)
+    private void OnSendUserLevelDataSuccess(UpdateUserDataResult result)
     {
-        Debug.Log("PlayFabManager: 서버에 유저 데이터를 저장했습니다.");
+        Debug.Log("PlayFabManager: 서버에 유저 레벨 데이터를 저장했습니다.");
     }
 
-    public void ReceiveServerUserData()
+    public void ReceiveUserLevelData()
     {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnReceiveServerUserDataSuccess,
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnReceiveUserLevelDataSuccess,
             error => Debug.LogError(error.GenerateErrorReport()));
     }
 
-    private void OnReceiveServerUserDataSuccess(GetUserDataResult result)
+    private void OnReceiveUserLevelDataSuccess(GetUserDataResult result)
     {
         if (result.Data == null)
         {
-            Debug.Log("PlayFabManager: 서버 유저 데이터가 없어서 받지 않았습니다.");
+            Debug.Log("PlayFabManager: 유저 레벨 데이터가 없어서 받지 않았습니다.");
             return;
         }
 
         if (!result.Data.ContainsKey("LastLevelCleared") || !result.Data.ContainsKey(userLevelDataKey))
         {
-            Debug.Log("PlayFabManager: 서버 유저 데이터가 불완전하여 받지 않았습니다.");
+            Debug.Log("PlayFabManager: 유저 레벨 데이터가 불완전하여 받지 않았습니다.");
             return;
         }
 
-        Debug.Log("PlayFabManager: 서버로부터 유저 데이터를 성공적으로 받았습니다.");
+        Debug.Log("PlayFabManager: 유저 레벨 데이터를 성공적으로 받았습니다.");
 
         int lastLevelCleared = int.Parse(result.Data["LastLevelCleared"].Value);
         UserLevelData[] userLevelDataList =
             JsonConvert.DeserializeObject<UserLevelData[]>(result.Data[userLevelDataKey].Value);
 
-        SaveLoadManager.instance.RecieveUserData(lastLevelCleared, userLevelDataList);
+        SaveLoadManager.instance.RecieveUserLevelData(lastLevelCleared, userLevelDataList);
     }
 
-    public void SendToLeaderboard(string leaderboardName, int score)
+    public void SendLeaderboard(string leaderboardName, int score)
     {
         var request = new UpdatePlayerStatisticsRequest
         {
@@ -156,11 +164,11 @@ public class PlayfabManager : MonoBehaviour
             }
         };
 
-        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSendToLeaderboardSuccess,
+        PlayFabClientAPI.UpdatePlayerStatistics(request, OnSendLeaderboardSuccess,
             error => Debug.LogError(error.GenerateErrorReport()));
     }
 
-    private void OnSendToLeaderboardSuccess(UpdatePlayerStatisticsResult result)
+    private void OnSendLeaderboardSuccess(UpdatePlayerStatisticsResult result)
     {
         Debug.Log("PlayFabManager: 리더보드에 기록을 성공적으로 등록했습니다.");
     }
@@ -174,11 +182,11 @@ public class PlayfabManager : MonoBehaviour
             MaxResultsCount = 100
         };
 
-        PlayFabClientAPI.GetLeaderboard(request, OnReceiveLeaderboard,
+        PlayFabClientAPI.GetLeaderboard(request, OnReceiveLeaderboardSuccess,
             error => Debug.Log(error.GenerateErrorReport()));
     }
 
-    private void OnReceiveLeaderboard(GetLeaderboardResult result)
+    private void OnReceiveLeaderboardSuccess(GetLeaderboardResult result)
     {
         foreach (Transform item in leaderboardRowsParent)
         {
@@ -197,5 +205,54 @@ public class PlayfabManager : MonoBehaviour
         }
 
         Debug.Log("PlayfabManager: 리더보드 정보를 가져왔습니다.");
+    }
+
+    public void SendUserTraitData(UserTraitData userTraitData)
+    {
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>
+            {
+                {userTraitDataKey, JsonConvert.SerializeObject(userTraitData) }
+            }
+        };
+
+        PlayFabClientAPI.UpdateUserData(request, OnSendUserTraitDataSuccess,
+            error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    private void OnSendUserTraitDataSuccess(UpdateUserDataResult result)
+    {
+        Debug.Log("PlayFabManager: 서버에 유저 특징 데이터를 저장했습니다.");
+    }
+
+    public void ReceiveUserTraitData()
+    {
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnReceiveUserTraitDataSuccess,
+            error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    private void OnReceiveUserTraitDataSuccess(GetUserDataResult result)
+    {
+        if (result.Data == null)
+        {
+            Debug.Log("PlayFabManager: 유저 특징 데이터가 없어서 받지 않았습니다.");
+            userTraitManager.InitUserTraitData();
+            return;
+        }
+
+        if (!result.Data.ContainsKey(userTraitDataKey))
+        {
+            Debug.Log("PlayFabManager: 유저 특징 데이터가 불완전하여 받지 않았습니다.");
+            userTraitManager.InitUserTraitData();
+            return;
+        }
+
+        Debug.Log("PlayFabManager: 유저 특징 데이터를 성공적으로 받았습니다.");
+
+        UserTraitData userTraitData =
+            JsonConvert.DeserializeObject<UserTraitData>(result.Data[userTraitDataKey].Value);
+
+        SaveLoadManager.instance.ReceiveUserTraitData(userTraitData);
     }
 }

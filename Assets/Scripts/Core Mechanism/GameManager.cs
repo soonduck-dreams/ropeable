@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
         score = 0;
 
         gameState = GameState.Playing;
+
+        PlayBackgroundDependingOnLevel();
     }
 
     public void OnPlayerDie()
@@ -130,6 +132,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         gameState = GameState.Standby;
+        AudioManager.instance.StopAllSounds();
         MainUIOpenMode.openMode = MainUIOpenMode.OpenMode.LevelSelect;
         SceneManager.LoadScene("MainMenu");
     }
@@ -173,5 +176,38 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void PlayBackgroundDependingOnLevel()
+    {
+        string bgmName = "";
+
+        if (LevelInfoManager.instance.curLevel <= 10)
+        {
+            bgmName = "PlayBgmEasy1";
+        }
+        else if (LevelInfoManager.instance.curLevel <= 20)
+        {
+            bgmName = "PlayBgmNormal1";
+        }
+        else if (LevelInfoManager.instance.curLevel <= 30)
+        {
+            bgmName = "PlayBgmNormal2";
+        }
+        else if (LevelInfoManager.instance.curLevel <= 40)
+        {
+            bgmName = "PlayBgmNormal3";
+        }
+        else if (LevelInfoManager.instance.curLevel <= 50)
+        {
+            bgmName = "PlayBgmExpert1";
+        }
+
+        if (bgmName == string.Empty)
+        {
+            return;
+        }
+
+        AudioManager.instance.PlayBackgroundExclusively(bgmName);
     }
 }

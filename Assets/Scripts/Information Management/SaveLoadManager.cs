@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class SaveLoadManager : MonoBehaviour
 {
-    [SerializeField]
-    private PlayfabManager playfabManager;
+    [SerializeField] private PlayfabManager playfabManager;
+    [SerializeField] private UserTraitManager userTraitManager;
 
     public static SaveLoadManager instance;
     public readonly static bool allowToSaveAndLoadOnline = true;
@@ -23,7 +23,7 @@ public class SaveLoadManager : MonoBehaviour
         instance = this;
     }
 
-    public void RequestToSaveUserData(int lastLevelCleared, bool[] isStarCleared, int[] numLeastRopeUsedToClear, float[] shortestSecondsTakenToClear)
+    public void RequestToSaveUserLevelData(int lastLevelCleared, bool[] isStarCleared, int[] numLeastRopeUsedToClear, float[] shortestSecondsTakenToClear)
     {
         UserLevelData[] userLevelDataList = new UserLevelData[isStarCleared.Length];
 
@@ -33,15 +33,15 @@ public class SaveLoadManager : MonoBehaviour
                 new UserLevelData(i, isStarCleared[i], numLeastRopeUsedToClear[i], shortestSecondsTakenToClear[i]);
         }
 
-        playfabManager.SendLocalUserData(lastLevelCleared, userLevelDataList);
+        playfabManager.SendUserLevelData(lastLevelCleared, userLevelDataList);
     }
 
-    public void RequestToLoadUserData()
+    public void RequestToLoadUserLevelData()
     {
-        playfabManager.ReceiveServerUserData();
+        playfabManager.ReceiveUserLevelData();
     }
 
-    public void RecieveUserData(int lastLevelCleared, UserLevelData[] userLevelDataList)
+    public void RecieveUserLevelData(int lastLevelCleared, UserLevelData[] userLevelDataList)
     {
         bool[] isStarCleared = new bool[userLevelDataList.Length];
         int[] numLeastRopeUsedToClear = new int[userLevelDataList.Length];
@@ -62,7 +62,7 @@ public class SaveLoadManager : MonoBehaviour
         string leaderboardName = "LevelScore" + level.ToString();
         int score = LeaderboardScore(numLeastRopeUsedToClear, shortestSecondsTakenToClear);
         
-        playfabManager.SendToLeaderboard(leaderboardName, score);
+        playfabManager.SendLeaderboard(leaderboardName, score);
     }
 
     public void RequestToGetLeaderboard(int level)
@@ -77,5 +77,20 @@ public class SaveLoadManager : MonoBehaviour
         string timeString = timeRecord.ToString().Split('.')[0] + timeRecord.ToString().Split('.')[1];
 
         return ropeRecord * 1000000 + int.Parse(timeString);
+    }
+
+    public void RequestToSaveUserTraitData(UserTraitData userTraitData)
+    {
+        playfabManager.SendUserTraitData(userTraitData);
+    }
+
+    public void RequestToLoadUserTraitData()
+    {
+        playfabManager.ReceiveUserTraitData();
+    }
+
+    public void ReceiveUserTraitData(UserTraitData userTraitData)
+    {
+        userTraitManager.SetUserTraitData(userTraitData);
     }
 }

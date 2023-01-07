@@ -116,6 +116,8 @@ public class PlayerRopeShooter : MonoBehaviour
 
         SetRopeHangObject(ropeable);
         ropeHangObject.OnRopeHang();
+
+        AudioManager.instance.PlaySound("Hang");
     }
 
     public void CutRope(Vector3 clickPos)

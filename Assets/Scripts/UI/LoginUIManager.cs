@@ -16,6 +16,7 @@ public class LoginUIManager : MonoBehaviour
     [SerializeField] private GameObject loginSuccessful;
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_Text loginSuccessfulText;
+    [SerializeField] private GameObject loginFailed;
 
     private void Start()
     {
@@ -38,8 +39,19 @@ public class LoginUIManager : MonoBehaviour
         GoToMainScene();
     }
 
+    public void ShowLoginFailed()
+    {
+        HideStandby();
+        loginFailed.SetActive(true);
+    }
+
     public void SubmitNameButton()
     {
+        if (usernameInputField.text.Length <= 2 || usernameInputField.text.Length >= 26)
+        {
+            return;
+        }
+
         playfabManager.InitUsername(usernameInputField.text);
     }
 
@@ -57,5 +69,10 @@ public class LoginUIManager : MonoBehaviour
     {
         SceneTransition.endWith = SceneTransition.EndWith.Crossfade;
         StartCoroutine(sceneTransition.CrossfadeStart( () => { SceneManager.LoadScene("MainMenu"); }, 3f));
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

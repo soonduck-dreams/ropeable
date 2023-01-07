@@ -177,7 +177,7 @@ public class LevelInfoManager : MonoBehaviour
     {
         if (SaveLoadManager.allowToSaveAndLoadOnline)
         {
-            SaveLoadManager.instance.RequestToLoadUserData();
+            SaveLoadManager.instance.RequestToLoadUserLevelData();
         }
     }
 
@@ -185,7 +185,7 @@ public class LevelInfoManager : MonoBehaviour
     {
         if (SaveLoadManager.allowToSaveAndLoadOnline)
         {
-            SaveLoadManager.instance.RequestToSaveUserData(lastLevelCleared, isStarCleared, numLeastRopeUsedToClear, shortestSecondsTakenToClear);
+            SaveLoadManager.instance.RequestToSaveUserLevelData(lastLevelCleared, isStarCleared, numLeastRopeUsedToClear, shortestSecondsTakenToClear);
         }
     }
 
