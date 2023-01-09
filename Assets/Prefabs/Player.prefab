@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRocketParticlePrefab: {fileID: 5512501347478969941, guid: edb0defc0a317114b8ec93f2d1647d18, type: 3}
   playerTrailParticlePrefab: {fileID: 9195503442161932037, guid: 03fd2d7528d2202458c723f39f4ed51f, type: 3}
+  playerSpeedyParticlePrefab: {fileID: 7324832441771383114, guid: 63915d13500e4d943a03d80aa87e49de, type: 3}
 --- !u!114 &4070279330552054625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDieParticleBlue: {fileID: 1412155167543142767, guid: 3b2fd626147e6a14c8ff07c065e3dbf3, type: 3}
   playerDieParticleYellow: {fileID: 635174140511958216, guid: 2626f4e85943f054facd8668a6e2903a, type: 3}
+  playerFollower: {fileID: 0}
 --- !u!58 &148655899755013299
 CircleCollider2D:
   m_ObjectHideFlags: 0

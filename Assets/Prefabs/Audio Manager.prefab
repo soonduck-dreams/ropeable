@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &655719507203471950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 655719507203471949}
+  - component: {fileID: 655719507203471948}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &655719507203471949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655719507203471950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.6137, y: 543.6504, z: -2.7035234}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &655719507203471948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655719507203471950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45020860183af3e498f2d7d956c2f70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - soundType: 0
+    name: PlayBgmEasy1
+    clips:
+    - {fileID: 8300000, guid: 22ed24eec2cdd4847b44eefc803dab55, type: 3}
+    loop: 1
+    volume: 0.9
+    pitch: 1
+    pitchDeviation: 0
+    source: {fileID: 0}
+  - soundType: 1
+    name: Hang
+    clips:
+    - {fileID: 8300000, guid: 0b0f2a2e80ed88e409d7d12069521134, type: 3}
+    loop: 0
+    volume: 0.2
+    pitch: 0.7
+    pitchDeviation: 0.2
+    source: {fileID: 0}
+  - soundType: 1
+    name: Scroll
+    clips:
+    - {fileID: 8300000, guid: 31f96c536ad5f3a44976aa20b2628466, type: 3}
+    loop: 0
+    volume: 0.5
+    pitch: 0.8
+    pitchDeviation: 0.2
+    source: {fileID: 0}
+  - soundType: 1
+    name: Cut
+    clips:
+    - {fileID: 8300000, guid: c70624be1e1b56d479963208b4081661, type: 3}
+    loop: 0
+    volume: 1.1
+    pitch: 1
+    pitchDeviation: 0.2
+    source: {fileID: 0}
+  - soundType: 1
+    name: Death
+    clips:
+    - {fileID: 8300000, guid: 9e4e8d2a9b9deab448434e32d9596b10, type: 3}
+    loop: 0
+    volume: 0.55
+    pitch: 0.6
+    pitchDeviation: 0.1
+    source: {fileID: 0}
+  - soundType: 1
+    name: GetFirstItem
+    clips:
+    - {fileID: 8300000, guid: 77c4a487b9550ed458d0acb5ad7b75f2, type: 3}
+    loop: 0
+    volume: 0.6
+    pitch: 1
+    pitchDeviation: 0
+    source: {fileID: 0}
+  - soundType: 1
+    name: GetSecondItem
+    clips:
+    - {fileID: 8300000, guid: 040273837691d5140bc883722d68b31d, type: 3}
+    loop: 0
+    volume: 0.6
+    pitch: 1
+    pitchDeviation: 0
+    source: {fileID: 0}
+  - soundType: 1
+    name: LevelClear
+    clips:
+    - {fileID: 8300000, guid: 6d12372b9a235fb49aa7bc2399553db3, type: 3}
+    loop: 0
+    volume: 0.6
+    pitch: 1
+    pitchDeviation: 0
+    source: {fileID: 0}
+  - soundType: 1
+    name: GetItemGeneral
+    clips:
+    - {fileID: 8300000, guid: 7e06c713d72c42146a242d5cd31c7ff6, type: 3}
+    loop: 0
+    volume: 0.7
+    pitch: 0.6
+    pitchDeviation: 0.1
+    source: {fileID: 0}
