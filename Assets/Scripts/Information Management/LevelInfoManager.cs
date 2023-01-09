@@ -58,6 +58,9 @@ public class LevelInfoManager : MonoBehaviour
         {
             ropeRewarded[i] = 20;
         }
+
+        ropeRewarded[1] = 24;
+        ropeRewarded[2] = 28;
     }
 
     private void SetLevelTitle()
@@ -67,10 +70,8 @@ public class LevelInfoManager : MonoBehaviour
             levelTitle[i] = ""; 
         }
 
-        levelTitle[1] = "Left-Click to Hang";
-        levelTitle[2] = "Right-Click to Cut";
-        levelTitle[3] = "Scroll Up to Leap";
-        levelTitle[4] = "Scroll Down to Fall";
+        levelTitle[1] = "a little soul";
+        levelTitle[2] = "nice and smooth";
     }
 
     public int GetRopeRewarded()
@@ -203,5 +204,10 @@ public class LevelInfoManager : MonoBehaviour
         isStarCleared = LevelInfoManager.isStarCleared;
         numLeastRopeUsedToClear = LevelInfoManager.numLeastRopeUsedToClear;
         shortestSecondsTakenToClear = LevelInfoManager.shortestSecondsTakenToClear;
+    }
+
+    public bool IsCurLevelCleared()
+    {
+        return lastLevelCleared >= curLevel;
     }
 }

@@ -69,7 +69,7 @@ public class PlayerMover : MonoBehaviour
         float rotationZ = inputSignal > 0 ? 180f : 0f;
         Vector3 position = inputSignal > 0 ? transform.position + 0.5f * Vector3.down
                                             : transform.position + 0.5f * Vector3.up;           
-        float adjustment = 20f;
+        float adjustment = inputSignal > 0 ? 25f : 30f;
 
         StunInAir();
         playerRigidbody.AddForce(adjustment * direction * Vector2.up, ForceMode2D.Impulse);
@@ -89,6 +89,7 @@ public class PlayerMover : MonoBehaviour
     public void StunInAir()
     {
         playerRigidbody.velocity = Vector2.zero;
+        playerRigidbody.angularVelocity = 0f;
     }
 
     public void ResetPlayerMovement()

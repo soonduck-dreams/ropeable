@@ -33,6 +33,11 @@ public class IngameTextSystem : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.gameState == GameManager.GameState.Cleared)
+        {
+            Destroy(gameObject);
+        }
+
         if (played)
         {
             return;
@@ -56,11 +61,12 @@ public class IngameTextSystem : MonoBehaviour
 
     private IEnumerator TypeLine(string str)
     {
+
         textComponent.text = string.Empty;
 
         foreach (char c in str.ToCharArray())
         {
-            textComponent.text += c;
+            textComponent.text += c != '$' ? c : '\n';
             yield return new WaitForSeconds(textSpeed);
         }
     }

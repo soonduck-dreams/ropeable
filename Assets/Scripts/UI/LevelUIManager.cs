@@ -20,6 +20,7 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] private GameObject ropesRewardedArea;
     [SerializeField] private TMP_Text ropesRewardedText;
     [SerializeField] private GameObject bestRecordImage;
+    [SerializeField] private Button clearLeaderboardButton;
 
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject pauseButton;
@@ -27,6 +28,7 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] private TMP_Text pauseRopesUsedText;
     [SerializeField] private TMP_Text pauseTimeTakenText;
     [SerializeField] private TMP_Text pauseItemGottenText;
+    [SerializeField] private Button pauseLeaderboardButton;
 
     [SerializeField] private GameObject leaderboardUI;
     [SerializeField] private TMP_Text leaderboardTitleText;
@@ -78,6 +80,7 @@ public class LevelUIManager : MonoBehaviour
         SetTimeTakenText(secondsTakenToClear);
         pauseButton.SetActive(false);
         clearUI.SetActive(true);
+        SetLeaderboardButton();
     }
 
     public void ShowPauseUI(int ropeUsedToClear, float secondsTakenToClear, int itemGotten)
@@ -87,8 +90,9 @@ public class LevelUIManager : MonoBehaviour
         pauseRopesUsedText.text = ropeUsedToClear.ToString();
         pauseTimeTakenText.text = secondsTakenToClear.ToString() + "s";
         pauseItemGottenText.text = itemGotten.ToString() + "/3";
-        
+
         pauseUI.SetActive(true);
+        SetLeaderboardButton();
     }
 
     public void ClosePauseUI()
@@ -135,6 +139,12 @@ public class LevelUIManager : MonoBehaviour
     public void OnPauseButton()
     {
         ShowPauseUI(playerRopeShooter.numRopeUsedToClear, playerRopeShooter.secondsTakenToClear, GameManager.instance.score);
+    }
+
+    private void SetLeaderboardButton()
+    {
+        clearLeaderboardButton.interactable = LevelInfoManager.instance.IsCurLevelCleared();
+        pauseLeaderboardButton.interactable = LevelInfoManager.instance.IsCurLevelCleared();
     }
 
     public void OnLeaderboardButton()
