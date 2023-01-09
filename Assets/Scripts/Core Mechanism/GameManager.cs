@@ -87,7 +87,18 @@ public class GameManager : MonoBehaviour
     {
         AddScore();
 
-        if(score >= 3)
+        AudioManager.instance.PlayEffects("GetItemGeneral");
+
+        if (score == 1)
+        {
+            AudioManager.instance.PlayEffects("GetFirstItem", true);
+        }
+        else if(score == 2)
+        {
+            AudioManager.instance.PlayEffects("GetSecondItem", true);
+        }
+
+        if (score >= 3)
         {
             OnLevelClear();
         }
@@ -99,6 +110,7 @@ public class GameManager : MonoBehaviour
         playerRopeShooter.StopAndRecordTimeTaken();
         LevelInfoManager.instance.OnClear();
         LevelUIManager.instance.ShowClearUI(playerRopeShooter.numRopeUsedToClear, playerRopeShooter.secondsTakenToClear);
+        AudioManager.instance.PlayEffects("LevelClear", true);
     }
 
     public void GoToNextLevel()
@@ -182,21 +194,13 @@ public class GameManager : MonoBehaviour
     {
         string bgmName = "";
 
-        if (LevelInfoManager.instance.curLevel <= 10)
+        if (LevelInfoManager.instance.curLevel <= 20)
         {
             bgmName = "PlayBgmEasy1";
         }
-        else if (LevelInfoManager.instance.curLevel <= 20)
-        {
-            bgmName = "PlayBgmNormal1";
-        }
-        else if (LevelInfoManager.instance.curLevel <= 30)
-        {
-            bgmName = "PlayBgmNormal2";
-        }
         else if (LevelInfoManager.instance.curLevel <= 40)
         {
-            bgmName = "PlayBgmNormal3";
+            bgmName = "PlayBgmNormal1";
         }
         else if (LevelInfoManager.instance.curLevel <= 50)
         {
@@ -208,6 +212,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        AudioManager.instance.PlayBackgroundExclusively(bgmName);
+        AudioManager.instance.PlayBackground(bgmName);
     }
 }

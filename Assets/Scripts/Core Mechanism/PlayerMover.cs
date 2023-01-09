@@ -78,7 +78,7 @@ public class PlayerMover : MonoBehaviour
         ParticleManager.instance.PlayParticle(playerRocketParticlePrefab, position);
         ParticleManager.instance.PlayParticleForSeconds(playerTrailParticlePrefab, gameObject, 0.2f, 0.01f, rotationZ);
         cameraMover.ShakeCamera(0.01f, 0f, 1f);
-        AudioManager.instance.PlaySound("Scroll");
+        AudioManager.instance.PlayEffects("Scroll");
     }
 
     public void SetPlayerGravity(float gravity)

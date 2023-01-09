@@ -116,6 +116,7 @@ public class PlayerHealth : LivingThing
     {
         playerFollower.SetActive(false);
         playerRopeShooter.CutRope(Vector3.zero);
+        AudioManager.instance.PlayEffects("Death", true);
         gameObject.SetActive(false);
     }
 }

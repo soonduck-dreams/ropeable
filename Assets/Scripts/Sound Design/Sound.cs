@@ -17,7 +17,7 @@ public class Sound
     public AudioClip[] clips;
     public bool loop;
 
-    [Range(0f, 1f)] public float volume;
+    [Range(0f, 1.2f)] public float volume;
     [Range(.1f, 3f)] public float pitch;
     public float pitchDeviation = 0f;
 

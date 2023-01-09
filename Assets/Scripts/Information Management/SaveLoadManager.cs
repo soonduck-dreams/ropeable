@@ -10,7 +10,7 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private UserTraitManager userTraitManager;
 
     public static SaveLoadManager instance;
-    public readonly static bool allowToSaveAndLoadOnline = true;
+    public readonly static bool allowToSaveAndLoadOnline = false;
 
     private void Awake()
     {

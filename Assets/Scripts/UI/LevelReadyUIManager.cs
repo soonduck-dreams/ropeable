@@ -17,6 +17,7 @@ public class LevelReadyUIManager : MonoBehaviour
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private TMP_Text starClearText;
     [SerializeField] private GameObject leaderboardUI;
+    [SerializeField] private Button leaderboardButton;
 
     private int rawLevelNo;
 
@@ -31,6 +32,7 @@ public class LevelReadyUIManager : MonoBehaviour
         {
             clearedCase.SetActive(false);
             unclearedCase.SetActive(true);
+            leaderboardButton.interactable = false;
         }
         else
         {
@@ -44,6 +46,7 @@ public class LevelReadyUIManager : MonoBehaviour
 
             unclearedCase.SetActive(false);
             clearedCase.SetActive(true);
+            leaderboardButton.interactable = true;
         }
 
         playButton.onClick.AddListener(PlayLevel);

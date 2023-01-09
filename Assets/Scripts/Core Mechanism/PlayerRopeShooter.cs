@@ -65,7 +65,7 @@ public class PlayerRopeShooter : MonoBehaviour
         if(cameraMover.targetMode == CameraMover.TargetMode.SectionSnapped
             && cameraMover.HasTargetPositionChanged())
         {
-            CutRope(Vector3.zero);
+            CutRope(Vector3.zero, false);
         }
     }
 
@@ -117,10 +117,15 @@ public class PlayerRopeShooter : MonoBehaviour
         SetRopeHangObject(ropeable);
         ropeHangObject.OnRopeHang();
 
-        AudioManager.instance.PlaySound("Hang");
+        AudioManager.instance.PlayEffects("Hang");
     }
 
     public void CutRope(Vector3 clickPos)
+    {
+        CutRope(clickPos, true);
+    }
+
+    public void CutRope(Vector3 clickPos, bool calledByClickEvent)
     {
         if (rope.enabled == false)
         {
@@ -134,6 +139,11 @@ public class PlayerRopeShooter : MonoBehaviour
 
         ropeHangObject.OnRopeCut();
         SetRopeHangObject(null);
+
+        if (calledByClickEvent)
+        {
+            AudioManager.instance.PlayEffects("Cut");
+        }
     }
 
     private void ChangePlayerMovementByTerrainType(string name)
