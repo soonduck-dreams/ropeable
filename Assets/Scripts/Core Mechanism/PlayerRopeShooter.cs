@@ -104,6 +104,7 @@ public class PlayerRopeShooter : MonoBehaviour
     {
         if (rope.enabled == true)
         {
+            ropeHangObject.OnRopeCut();
             rope.PlayTrailParticle();
         }
 
@@ -168,6 +169,11 @@ public class PlayerRopeShooter : MonoBehaviour
                 break;
 
             case "guard":
+                playerMover.StunInAir();
+                playerMover.SetPlayerGravity(2f);
+                break;
+
+            case "magnet":
                 playerMover.StunInAir();
                 playerMover.SetPlayerGravity(2f);
                 break;

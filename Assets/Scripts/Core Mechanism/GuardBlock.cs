@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardBlock : MonoBehaviour, IRopeable, IListener, ISpeaker, IPositionLocalizer
+public class GuardBlock : MonoBehaviour, IRopeable, IListener, ISpeaker, IPositionLocalizer, IMagnetTarget
 {
     public GameObject destroyer;
 

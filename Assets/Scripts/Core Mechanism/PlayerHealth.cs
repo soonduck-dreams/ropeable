@@ -13,7 +13,7 @@ public class PlayerHealth : LivingThing
 
     private float lastProtectTime = 0f;
     private float protectSeconds = 2f;
-    private float fallToDeathThreshold = -1f;
+    private float fallToDeathThreshold = -0.5f;
 
     public enum State
     {

@@ -215,6 +215,12 @@ public class Rope : MonoBehaviour
                 ropeLengthAdjustment = 0.6f;
                 break;
 
+            case "magnet":
+                restoreForceAdjustment = 0.4f;
+                ropeGravityAdjustment = 3f;
+                ropeLengthAdjustment = 0.4f;
+                break;
+
             default:
                 Debug.LogWarning("Rope: 등록되지 않은 지형입니다!");
                 break;
