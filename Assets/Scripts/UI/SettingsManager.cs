@@ -23,7 +23,7 @@ public class SettingsManager : MonoBehaviour
     public static bool displayElapsedTimeWhilePlaying;
 
     private Resolution[] resolutions;
-    private int currentResolutionIndex = 0;
+    private int defaultResolutionIndex = 0;
 
     private void OnDisable()
     {
@@ -31,7 +31,7 @@ public class SettingsManager : MonoBehaviour
         LoadSettings();
 
         SetCanChangeName();
-        gameObject.SetActive(false);
+        Debug.Log(Time.time);
     }
 
     private void LoadSettings()
@@ -44,9 +44,9 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
-            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.value = defaultResolutionIndex;
             resolutionDropdown.RefreshShownValue();
-            SetResolution(currentResolutionIndex);
+            SetResolution(defaultResolutionIndex);
         }
 
         fullscreenToggle.isOn = PlayerPrefs.GetInt("isFullscreen", 1) == 1 ? true : false;
@@ -73,7 +73,10 @@ public class SettingsManager : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
-        currentResolutionIndex = 0;
+        defaultResolutionIndex = 0;
+
+        float minResolutionAreaDiff = -1f;
+        float nowResolutionAreaDiff;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
@@ -83,10 +86,13 @@ public class SettingsManager : MonoBehaviour
                 string option = resolutions[i].width + "x" + resolutions[i].height;
                 options.Add(option);
 
-                if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+                nowResolutionAreaDiff = Mathf.Abs(resolutions[i].width * resolutions[i].height
+                    - Screen.currentResolution.width * Screen.currentResolution.height);
+
+                if (minResolutionAreaDiff == -1f || nowResolutionAreaDiff < minResolutionAreaDiff)
                 {
-                    currentResolutionIndex = options.Count - 1;
+                    minResolutionAreaDiff = nowResolutionAreaDiff;
+                    defaultResolutionIndex = options.Count - 1;
                 }
             }
         }

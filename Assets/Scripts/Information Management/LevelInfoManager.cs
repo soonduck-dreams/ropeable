@@ -65,6 +65,8 @@ public class LevelInfoManager : MonoBehaviour
         ropeRewarded[4] = 29;
         ropeRewarded[5] = 27;
         ropeRewarded[6] = 36;
+        ropeRewarded[7] = 23;
+        ropeRewarded[8] = 24;
     }
 
     private void SetLevelTitle()
@@ -80,6 +82,8 @@ public class LevelInfoManager : MonoBehaviour
         levelTitle[4] = "vines align";
         levelTitle[5] = "spikes lesson";
         levelTitle[6] = "switch and door";
+        levelTitle[7] = "glass cladding";
+        levelTitle[8] = "gravity twisted";
     }
 
     public int GetRopeRewarded()

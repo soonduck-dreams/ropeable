@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class GuardBlock : MonoBehaviour, IRopeable, IListener, ISpeaker, IPositionLocalizer, IMagnetTarget
@@ -14,9 +15,9 @@ public class GuardBlock : MonoBehaviour, IRopeable, IListener, ISpeaker, IPositi
     }
 
     public SpeakAbout speakAbout = SpeakAbout.Nothing;
+    [SerializeField] private bool isPulledByRope = false;
 
     private List<IListener> listeners;
-
     private float fallDestroyThreshold = -10f;
 
     private void Awake()
@@ -46,7 +47,7 @@ public class GuardBlock : MonoBehaviour, IRopeable, IListener, ISpeaker, IPositi
 
     public string GetTerrainType()
     {
-        return "guard";
+        return IsPulledByRope() ? "gold": "guard";
     }
 
     public void OnRopeHang()
@@ -103,5 +104,15 @@ public class GuardBlock : MonoBehaviour, IRopeable, IListener, ISpeaker, IPositi
     public Vector3 LocalToWorldPos(Vector3 localPos)
     {
         return (Vector2)transform.TransformPoint(localPos);
+    }
+
+    public bool IsPulledByRope()
+    {
+        return isPulledByRope;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 }

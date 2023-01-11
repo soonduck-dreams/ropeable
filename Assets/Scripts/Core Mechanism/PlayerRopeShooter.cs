@@ -183,6 +183,11 @@ public class PlayerRopeShooter : MonoBehaviour
                 playerMover.SetPlayerGravity(2f);
                 break;
 
+            case "gold":
+                playerMover.StunInAir();
+                playerMover.SetPlayerGravity(0f);
+                break;
+
             default:
                 Debug.LogWarning("PlayerRopeShooter: 등록되지 않은 지형입니다!");
                 break;

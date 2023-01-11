@@ -119,6 +119,7 @@ public class MagnetBlock : MonoBehaviour, IRopeable, IMagnet
 
         foreach (var target in targets)
         {
+
             Vector2 directionVector = ((Vector2)transform.position + positionAdjustment - target.position).normalized;
 
             target.AddForce(pullAdjustment * directionVector);
@@ -139,12 +140,11 @@ public class MagnetBlock : MonoBehaviour, IRopeable, IMagnet
 
     private List<Rigidbody2D> GetMagnetTargets()
     {
-        Collider2D[] colliders = new Collider2D[5];
+        Collider2D[] colliders = new Collider2D[20];
         ContactFilter2D filter = new ContactFilter2D();
 
         filter.SetDepth(0f, 0f);
         filter.useDepth = true;
-
 
         Physics2D.OverlapCircle(transform.position, radiusAdjustment, filter, colliders);
 
