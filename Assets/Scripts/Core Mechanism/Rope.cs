@@ -212,10 +212,16 @@ public class Rope : MonoBehaviour
             case "guard":
                 restoreForceAdjustment = 0.4f;
                 ropeGravityAdjustment = 3f;
-                ropeLengthAdjustment = 0.6f;
+                ropeLengthAdjustment = 0.5f;
                 break;
 
             case "magnet":
+                restoreForceAdjustment = 0.4f;
+                ropeGravityAdjustment = 3f;
+                ropeLengthAdjustment = 0.4f;
+                break;
+
+            case "switch":
                 restoreForceAdjustment = 0.4f;
                 ropeGravityAdjustment = 3f;
                 ropeLengthAdjustment = 0.4f;

@@ -25,7 +25,7 @@ public class SettingsManager : MonoBehaviour
     private Resolution[] resolutions;
     private int currentResolutionIndex = 0;
 
-    private void Start()
+    private void OnDisable()
     {
         InitResolutionDropdown();
         LoadSettings();

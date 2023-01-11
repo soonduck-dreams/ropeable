@@ -98,13 +98,13 @@ public class MainUIManager : MonoBehaviour
             case MainUIOpenMode.OpenMode.Main:
                 levelReadyUI.gameObject.SetActive(false);
                 levelSelectScreen.SetActive(false);
-                //settingsScreen.SetActive(true);
+                settingsScreen.SetActive(false);
                 break;
 
             case MainUIOpenMode.OpenMode.LevelSelect:
                 levelReadyUI.gameObject.SetActive(false);
                 mainScreen.SetActive(false);
-                //settingsScreen.SetActive(true);
+                settingsScreen.SetActive(false);
                 break;
         }
     }

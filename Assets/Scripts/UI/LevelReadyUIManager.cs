@@ -43,6 +43,10 @@ public class LevelReadyUIManager : MonoBehaviour
             {
                 starClearText.text = "STAR CLEARED!";
             }
+            else
+            {
+                starClearText.text = "";
+            }
 
             unclearedCase.SetActive(false);
             clearedCase.SetActive(true);

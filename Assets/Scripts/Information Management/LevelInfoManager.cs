@@ -16,7 +16,7 @@ public class LevelInfoManager : MonoBehaviour
     [HideInInspector]
     public int curLevel;
 
-    public static readonly int maxLevel = 5;
+    public static readonly int maxLevel = 50;
 
     // 레벨별 고정 정보
     private int[] ropeRewarded = new int[maxLevel + 1];
@@ -63,6 +63,8 @@ public class LevelInfoManager : MonoBehaviour
         ropeRewarded[2] = 28;
         ropeRewarded[3] = 25;
         ropeRewarded[4] = 29;
+        ropeRewarded[5] = 27;
+        ropeRewarded[6] = 36;
     }
 
     private void SetLevelTitle()
@@ -76,6 +78,8 @@ public class LevelInfoManager : MonoBehaviour
         levelTitle[2] = "nice and smooth";
         levelTitle[3] = "the lie of order";
         levelTitle[4] = "vines align";
+        levelTitle[5] = "spikes lesson";
+        levelTitle[6] = "switch and door";
     }
 
     public int GetRopeRewarded()
