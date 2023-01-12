@@ -104,6 +104,7 @@ public class PlayerRopeShooter : MonoBehaviour
     {
         if (rope.enabled == true)
         {
+            ropeHangObject.OnRopeCut();
             rope.PlayTrailParticle();
         }
 
@@ -170,6 +171,21 @@ public class PlayerRopeShooter : MonoBehaviour
             case "guard":
                 playerMover.StunInAir();
                 playerMover.SetPlayerGravity(2f);
+                break;
+
+            case "magnet":
+                playerMover.StunInAir();
+                playerMover.SetPlayerGravity(2f);
+                break;
+
+            case "switch":
+                playerMover.StunInAir();
+                playerMover.SetPlayerGravity(2f);
+                break;
+
+            case "gold":
+                playerMover.StunInAir();
+                playerMover.SetPlayerGravity(0f);
                 break;
 
             default:

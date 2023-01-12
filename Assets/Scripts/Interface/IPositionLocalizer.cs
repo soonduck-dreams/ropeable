@@ -6,4 +6,6 @@ public interface IPositionLocalizer
 {
     Vector3 WorldToLocalPos(Vector3 worldPos);
     Vector3 LocalToWorldPos(Vector3 localPos);
+    bool IsPulledByRope();
+    GameObject GetGameObject();
 }

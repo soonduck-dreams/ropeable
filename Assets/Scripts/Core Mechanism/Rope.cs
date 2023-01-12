@@ -143,7 +143,14 @@ public class Rope : MonoBehaviour
 
         if (distanceError > 0)
         {
-            playerTransform.GetComponent<Rigidbody2D>().AddForce( restoreForce * (firstSegment.posNow - (Vector2)playerTransform.position).normalized );
+            if (positionLocalizer != null && positionLocalizer.IsPulledByRope())
+            {
+                positionLocalizer.GetGameObject().GetComponent<Rigidbody2D>().AddForce(restoreForce * ((Vector2)playerTransform.position - firstSegment.posNow).normalized);
+            }
+            else
+            {
+                playerTransform.GetComponent<Rigidbody2D>().AddForce(restoreForce * (firstSegment.posNow - (Vector2)playerTransform.position).normalized);
+            }
         }
 
         lastSegment.posNow = (Vector2)playerTransform.position;
@@ -212,7 +219,25 @@ public class Rope : MonoBehaviour
             case "guard":
                 restoreForceAdjustment = 0.4f;
                 ropeGravityAdjustment = 3f;
-                ropeLengthAdjustment = 0.6f;
+                ropeLengthAdjustment = 0.5f;
+                break;
+
+            case "magnet":
+                restoreForceAdjustment = 0.4f;
+                ropeGravityAdjustment = 3f;
+                ropeLengthAdjustment = 0.4f;
+                break;
+
+            case "switch":
+                restoreForceAdjustment = 0.4f;
+                ropeGravityAdjustment = 3f;
+                ropeLengthAdjustment = 0.4f;
+                break;
+
+            case "gold":
+                restoreForceAdjustment = 0.4f;
+                ropeGravityAdjustment = 1f;
+                ropeLengthAdjustment = 0.3f;
                 break;
 
             default:

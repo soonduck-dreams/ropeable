@@ -13,8 +13,6 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private TMP_Dropdown qualityDropdown;
-    [SerializeField] private Slider backgroundSlider;
-    [SerializeField] private Slider effectSlider;
     [SerializeField] private Button openChangeNamePanelButton;
     [SerializeField] private TMP_InputField usernameInputField;
     [SerializeField] private TMP_Text currentUsernameText;
@@ -23,15 +21,12 @@ public class SettingsManager : MonoBehaviour
     public static bool displayElapsedTimeWhilePlaying;
 
     private Resolution[] resolutions;
-    private int currentResolutionIndex = 0;
+    private int defaultResolutionIndex = 0;
 
-    private void Start()
+    private void OnDisable()
     {
         InitResolutionDropdown();
         LoadSettings();
-
-        SetCanChangeName();
-        gameObject.SetActive(false);
     }
 
     private void LoadSettings()
@@ -44,9 +39,9 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
-            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.value = defaultResolutionIndex;
             resolutionDropdown.RefreshShownValue();
-            SetResolution(currentResolutionIndex);
+            SetResolution(defaultResolutionIndex);
         }
 
         fullscreenToggle.isOn = PlayerPrefs.GetInt("isFullscreen", 1) == 1 ? true : false;
@@ -54,12 +49,6 @@ public class SettingsManager : MonoBehaviour
 
         qualityDropdown.value = PlayerPrefs.GetInt("qualityIndex", 5);
         SetQuality(PlayerPrefs.GetInt("qualityIndex", 5));
-
-        backgroundSlider.value = PlayerPrefs.GetFloat("backgroundVolume", 0f);
-        SetBackgroundVolume(PlayerPrefs.GetFloat("backgroundVolume", 0f));
-
-        effectSlider.value = PlayerPrefs.GetFloat("effectVolume", 0f);
-        SetEffectVolume(PlayerPrefs.GetFloat("effectVolume", 0f));
 
         RefreshShownCurrentUsernameText(PlayfabManager.username);
 
@@ -73,7 +62,10 @@ public class SettingsManager : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
-        currentResolutionIndex = 0;
+        defaultResolutionIndex = 0;
+
+        float minResolutionAreaDiff = -1f;
+        float nowResolutionAreaDiff;
 
         for (int i = 0; i < resolutions.Length; i++)
         {
@@ -83,10 +75,13 @@ public class SettingsManager : MonoBehaviour
                 string option = resolutions[i].width + "x" + resolutions[i].height;
                 options.Add(option);
 
-                if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+                nowResolutionAreaDiff = Mathf.Abs(resolutions[i].width * resolutions[i].height
+                    - Screen.currentResolution.width * Screen.currentResolution.height);
+
+                if (minResolutionAreaDiff == -1f || nowResolutionAreaDiff < minResolutionAreaDiff)
                 {
-                    currentResolutionIndex = options.Count - 1;
+                    minResolutionAreaDiff = nowResolutionAreaDiff;
+                    defaultResolutionIndex = options.Count - 1;
                 }
             }
         }
@@ -118,18 +113,6 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("qualityIndex", qualityIndex);
     }
 
-    public void SetBackgroundVolume(float volume)
-    {
-        // BG Audio Mixer
-        PlayerPrefs.SetFloat("backgroundVolume", volume);
-    } // TODO
-
-    public void SetEffectVolume(float volume)
-    {
-        // Effect Audio Mixer
-        PlayerPrefs.SetFloat("effectVolume", volume);
-    } // TODO
-
     public void ConfirmChangedNameButton()
     {
         if (usernameInputField.text.Length <= 2 || usernameInputField.text.Length >= 26)
@@ -158,11 +141,11 @@ public class SettingsManager : MonoBehaviour
         LoadSettings();
     }
 
-    private void SetCanChangeName()
+    public void SetCanChangeName(bool canChangeName)
     {
-        openChangeNamePanelButton.interactable = userTraitManager.userTraitData.canChangeName;
+        openChangeNamePanelButton.interactable = canChangeName;
 
-        if (!userTraitManager.userTraitData.canChangeName)
+        if (!canChangeName)
         {
             openChangeNamePanelButton.GetComponentInChildren<TMP_Text>().text = "name change restricted";
             openChangeNamePanelButton.GetComponentInChildren<TMP_Text>().fontSize = 35f;
