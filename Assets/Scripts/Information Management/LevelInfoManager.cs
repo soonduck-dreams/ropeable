@@ -16,7 +16,7 @@ public class LevelInfoManager : MonoBehaviour
     [HideInInspector]
     public int curLevel;
 
-    public static readonly int maxLevel = 50;
+    public static readonly int maxLevel = 10;
 
     // 레벨별 고정 정보
     private int[] ropeRewarded = new int[maxLevel + 1];
@@ -66,7 +66,9 @@ public class LevelInfoManager : MonoBehaviour
         ropeRewarded[5] = 27;
         ropeRewarded[6] = 36;
         ropeRewarded[7] = 23;
-        ropeRewarded[8] = 24;
+        ropeRewarded[8] = 25;
+        ropeRewarded[9] = 21;
+        ropeRewarded[10] = 24;
     }
 
     private void SetLevelTitle()
@@ -84,6 +86,8 @@ public class LevelInfoManager : MonoBehaviour
         levelTitle[6] = "switch and door";
         levelTitle[7] = "glass cladding";
         levelTitle[8] = "gravity twisted";
+        levelTitle[9] = "dizzy planet";
+        levelTitle[10] = "stay there, let me go";
     }
 
     public int GetRopeRewarded()
@@ -106,7 +110,7 @@ public class LevelInfoManager : MonoBehaviour
         return levelTitle[level];
     }
 
-    private void InitStatsIfNeeded()
+    public void InitStatsIfNeeded()
     {
         if (lastLevelCleared == -1)
         {
@@ -208,6 +212,11 @@ public class LevelInfoManager : MonoBehaviour
         LevelInfoManager.isStarCleared = isStarCleared;
         LevelInfoManager.numLeastRopeUsedToClear = numLeastRopeUsedToClear;
         LevelInfoManager.shortestSecondsTakenToClear = shortestSecondsTakenToClear;
+
+        if (isForMainUI)
+        {
+            MainUIManager.instance.Open();
+        }
     }
 
     public void GetStats(out int lastLevelCleared, out bool[] isStarCleared, out int[] numLeastRopeUsedToClear, out float[] shortestSecondsTakenToClear)

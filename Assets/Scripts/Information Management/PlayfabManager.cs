@@ -16,9 +16,8 @@ public class PlayfabManager : MonoBehaviour
     [SerializeField] private GameObject leaderboardRowPrefab;
     [SerializeField] private Transform leaderboardRowsParent;
 
-    // 데모용 저장 데이터를 나타내는 키. 정식판에서는 DEMO_를 뺄 예정
-    private readonly string userLevelDataKey = "DEMO_UserLevelData";
-    private readonly string userTraitDataKey = "DEMO_UserTraitData";
+    private readonly string userLevelDataKey = "UserLevelData";
+    private readonly string userTraitDataKey = "UserTraitData";
 
     public static string username { get; private set; }
 
@@ -132,12 +131,16 @@ public class PlayfabManager : MonoBehaviour
         if (result.Data == null)
         {
             Debug.Log("PlayFabManager: 유저 레벨 데이터가 없어서 받지 않았습니다.");
+            LevelInfoManager.instance.InitStatsIfNeeded();
+            MainUIManager.instance.Open();
             return;
         }
 
         if (!result.Data.ContainsKey("LastLevelCleared") || !result.Data.ContainsKey(userLevelDataKey))
         {
             Debug.Log("PlayFabManager: 유저 레벨 데이터가 불완전하여 받지 않았습니다.");
+            LevelInfoManager.instance.InitStatsIfNeeded();
+            MainUIManager.instance.Open();
             return;
         }
 
@@ -198,10 +201,12 @@ public class PlayfabManager : MonoBehaviour
             GameObject row = Instantiate(leaderboardRowPrefab, leaderboardRowsParent);
             TMP_Text[] rowInfo = row.GetComponentsInChildren<TMP_Text>();
 
+            int realStatValue = 1000000000 - item.StatValue;
+
             rowInfo[0].text = "#" + (item.Position + 1).ToString();
             rowInfo[1].text = item.DisplayName;
-            rowInfo[2].text = (item.StatValue / 1000000).ToString();
-            rowInfo[3].text = ((item.StatValue % 1000000) / 1000f).ToString() + "s";
+            rowInfo[2].text = (realStatValue / 1000000).ToString();
+            rowInfo[3].text = ((realStatValue % 1000000) / 1000f).ToString() + "s";
         }
 
         Debug.Log("PlayfabManager: 리더보드 정보를 가져왔습니다.");

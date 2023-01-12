@@ -10,7 +10,7 @@ public class SaveLoadManager : MonoBehaviour
     [SerializeField] private UserTraitManager userTraitManager;
 
     public static SaveLoadManager instance;
-    public readonly static bool allowToSaveAndLoadOnline = false;
+    public readonly static bool allowToSaveAndLoadOnline = true;
 
     private void Awake()
     {
@@ -74,9 +74,16 @@ public class SaveLoadManager : MonoBehaviour
 
     private int LeaderboardScore(int ropeRecord, float timeRecord)
     {
-        string timeString = timeRecord.ToString().Split('.')[0] + timeRecord.ToString().Split('.')[1];
+        string timeString = timeRecord.ToString().Split('.')[0] + TimeFormat(timeRecord.ToString().Split('.')[1]);
 
-        return ropeRecord * 1000000 + int.Parse(timeString);
+        int tempLeaderboardScore = ropeRecord * 1000000 + int.Parse(timeString);
+
+        return 1000000000 - tempLeaderboardScore;
+    }
+
+    private string TimeFormat(string s)
+    {
+        return s.Length == 3 ? s : (s.Length == 2 ? s + "0" : (s.Length == 1 ? s + "00" : "000"));
     }
 
     public void RequestToSaveUserTraitData(UserTraitData userTraitData)

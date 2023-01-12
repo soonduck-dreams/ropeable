@@ -534,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 519420033}
     - target: {fileID: 2182337379962556157, guid: 5ed7528fec7419d429e00105201b566d, type: 3}
       propertyPath: pullAdjustment
-      value: 30
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2182337379962556157, guid: 5ed7528fec7419d429e00105201b566d, type: 3}
       propertyPath: pushAdjustment
@@ -1036,7 +1036,7 @@ PrefabInstance:
       objectReference: {fileID: 519420033}
     - target: {fileID: 2182337379962556157, guid: 5ed7528fec7419d429e00105201b566d, type: 3}
       propertyPath: pullAdjustment
-      value: 25
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2182337379962556157, guid: 5ed7528fec7419d429e00105201b566d, type: 3}
       propertyPath: pushAdjustment

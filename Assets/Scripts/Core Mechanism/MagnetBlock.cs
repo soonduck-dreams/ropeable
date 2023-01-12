@@ -119,10 +119,10 @@ public class MagnetBlock : MonoBehaviour, IRopeable, IMagnet
 
         foreach (var target in targets)
         {
-
             Vector2 directionVector = ((Vector2)transform.position + positionAdjustment - target.position).normalized;
+            float distanceAdjustment = 5f / ((Vector2)transform.position + positionAdjustment - target.position).magnitude;
 
-            target.AddForce(pullAdjustment * directionVector);
+            target.AddForce(pullAdjustment * distanceAdjustment * directionVector);
         }
     }
 
@@ -133,8 +133,10 @@ public class MagnetBlock : MonoBehaviour, IRopeable, IMagnet
         foreach (var target in targets)
         {
             Vector2 directionVector = (target.position - (Vector2)transform.position).normalized;
+            float distanceAdjustment = 5f / ((Vector2)transform.position + positionAdjustment - target.position).magnitude;
 
-            target.AddForce(pushAdjustment * directionVector);
+
+            target.AddForce(pushAdjustment * distanceAdjustment * directionVector);
         }
     }
 

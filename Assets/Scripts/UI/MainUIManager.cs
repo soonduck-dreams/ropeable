@@ -17,6 +17,7 @@ public class MainUIManager : MonoBehaviour
     [SerializeField] private GameObject leaderboardUI;
     [SerializeField] private TMP_Text leaderboardTitleText;
     [SerializeField] private GameObject settingsScreen;
+    [SerializeField] private GameObject curtain;
 
     private int lastLevelCleared;
     private bool[] isStarCleared;
@@ -34,10 +35,10 @@ public class MainUIManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
+    public void Open()
     {
         LevelInfoManager.instance.GetStats(out lastLevelCleared, out isStarCleared,
-            out numLeastRopeUsedToClear, out shortestSecondsTakenToClear);
+    out numLeastRopeUsedToClear, out shortestSecondsTakenToClear);
         UpdateLvSelect();
         OpenWithOpenMode();
     }
@@ -99,12 +100,14 @@ public class MainUIManager : MonoBehaviour
                 levelReadyUI.gameObject.SetActive(false);
                 levelSelectScreen.SetActive(false);
                 settingsScreen.SetActive(false);
+                curtain.SetActive(false);
                 break;
 
             case MainUIOpenMode.OpenMode.LevelSelect:
                 levelReadyUI.gameObject.SetActive(false);
                 mainScreen.SetActive(false);
                 settingsScreen.SetActive(false);
+                curtain.SetActive(false);
                 break;
         }
     }
